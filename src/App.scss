@@ -1,0 +1,94 @@
+// Paragraph: stiff, blocky, tight
+// font-family: 'Kdam Thmor Pro', sans-serif;
+// Paragraph: bottom is flat
+// font-family: 'Miriam Libre', sans-serif;
+// Titles: angled
+// font-family: 'Racing Sans One', cursive;
+// Paragraph: straight edges
+// font-family: 'Sarala', sans-serif;
+// Title: angled, cursive
+// font-family: 'Sarina', cursive;
+// Paragraph: digital
+// font-family: 'Sarpanch', sans-serif;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+/////////////
+// VARIABLES
+/////////////
+$color-blue: rgb(0, 110, 255);
+
+//////////
+// MIXINS
+//////////
+@mixin flexbox($dir: row, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin h-w($height: 50px, $width: 50px) {
+  height: $height;
+  width: $width;
+}
+
+//////////
+// NAVBAR
+//////////
+.navbar {
+  position: relative;
+  top: 0;
+  background-color: $color-blue;
+  padding: 0 40px 0 40px;
+  @include h-w(80px, 100vw);
+  @include flexbox(row, center, flex-start);
+
+  img {
+    cursor: pointer;
+    @include h-w(30px, 30px);
+  }
+
+  .shopping-cart {
+    position: absolute;
+    right: 40px;
+    @include h-w(30px, 30px);
+  }
+
+  h1 {
+    font-size: 40px;
+    margin-left: 40px;
+    font-family: 'Racing Sans One', cursive;
+    cursor: pointer;
+  }
+
+  input {
+    margin-left: 40px;
+    @include h-w(40px, 1000px);
+    border: none;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+    color: rgb(77, 77, 77);
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    font-weight: 900;
+  }
+
+  .search-icon {
+    background-color: $color-blue;
+    border: none;
+    border-radius: 20px;
+    transform: translateX(-35px);
+    padding: 0;
+    @include h-w(30px, 30px);
+
+    img {
+      cursor: pointer;
+      @include h-w(20px, 20px);
+    }
+  }
+}
