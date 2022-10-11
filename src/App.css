@@ -3,41 +3,96 @@
   box-sizing: border-box;
 }
 
-.navbar {
+.homepage {
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
   position: absolute;
-  top: 0;
+  background-color: rgb(0, 110, 255);
   color: white;
-  background: linear-gradient(180deg, rgb(0, 110, 255) 90%, rgb(255, 255, 255) 93%, rgb(100, 100, 100) 100%);
-  padding: 0 40px 0 40px;
-  z-index: 5;
+  z-index: 10;
+}
+.homepage div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-25%);
+}
+.homepage div h1 {
+  font-size: 100px;
+  font-family: "Racing Sans One", cursive;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.homepage div input {
+  height: 40px;
+  width: 700px;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 40px;
+  color: rgb(77, 77, 77);
+  font-family: "Kdam Thmor Pro", sans-serif;
+  font-weight: 900;
+}
+.homepage div .search-icon {
+  height: 30px;
+  width: 30px;
+  background-color: rgb(0, 110, 255);
+  border: none;
+  border-radius: 20px;
+  transform: translateX(-35px) translateY(3px);
+  padding: 0;
+}
+.homepage div .search-icon img {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+.homepage div ul {
+  list-style: none;
+  padding: 0;
+}
+.homepage div ul li {
+  display: inline-block;
+  padding: 0 20px 0 20px;
+  font-size: 20px;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  letter-spacing: 2px;
+}
+.homepage div ul a {
+  cursor: pointer;
+}
+
+.navbar {
   height: 90px;
   width: 100vw;
-  display: flex;
-  flex-direction: row;
+  position: absolute;
+  top: 0;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
   align-items: center;
   justify-content: flex-start;
-}
-.navbar img {
-  cursor: pointer;
-  height: 30px;
-  width: 30px;
-}
-.navbar .shopping-cart {
-  position: absolute;
-  right: 40px;
-  height: 30px;
-  width: 30px;
+  color: white;
+  background: linear-gradient(180deg, rgb(0, 110, 255) 95%, rgba(100, 100, 100, 0.5) 95%, rgb(255, 255, 255) 100%);
+  padding: 0 200px 0 200px;
+  z-index: 5;
 }
 .navbar h1 {
   font-size: 40px;
-  margin-left: 40px;
   font-family: "Racing Sans One", cursive;
   cursor: pointer;
 }
 .navbar input {
-  margin-left: 40px;
   height: 40px;
-  width: 1000px;
+  width: 700px;
   border: none;
   border-radius: 20px;
   padding-left: 20px;
@@ -47,28 +102,47 @@
   font-weight: 900;
 }
 .navbar .search-icon {
+  height: 30px;
+  width: 30px;
   background-color: rgb(0, 110, 255);
   border: none;
   border-radius: 20px;
-  transform: translateX(-35px);
+  transform: translateX(-35px) translateY(3px);
   padding: 0;
-  height: 30px;
-  width: 30px;
 }
 .navbar .search-icon img {
   cursor: pointer;
   height: 20px;
   width: 20px;
 }
+.navbar ul {
+  list-style: none;
+  padding: 0;
+}
+.navbar ul li {
+  display: inline-block;
+  padding: 0 20px 0 20px;
+  font-size: 17px;
+  font-family: "Kdam Thmor Pro", sans-serif;
+  letter-spacing: 2px;
+}
+.navbar ul a {
+  cursor: pointer;
+}
+.navbar .shopping-cart {
+  height: 30px;
+  width: 30px;
+}
 
 .tag-filters {
+  height: calc(100vh - 90px);
+  width: 250px;
   position: absolute;
   left: 0;
   top: 90px;
   background: linear-gradient(90deg, rgb(255, 255, 255) 97%, rgba(100, 100, 100, 0.3) 97%, rgb(255, 255, 255) 100%);
   padding: 20px 40px 20px 40px;
-  height: calc(100vh - 90px);
-  width: 250px;
+  margin-left: 160px;
 }
 .tag-filters h1 {
   cursor: default;
@@ -88,11 +162,15 @@
 .tag-filters input {
   cursor: pointer;
 }
+.tag-filters button {
+  cursor: pointer;
+  margin-top: 30px;
+}
 
 .item-container {
+  height: calc(100vh - 90px);
+  width: calc(100vw - 250px);
   position: absolute;
   left: 200px;
   top: 90px;
-  height: calc(100vh - 90px);
-  width: calc(100vw - 250px);
 }/*# sourceMappingURL=App.css.map */

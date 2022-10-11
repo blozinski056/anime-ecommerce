@@ -37,41 +37,103 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   width: $width;
 }
 
+////////////
+// HOMEPAGE
+////////////
+.homepage {
+  @include flexbox(center, center);
+  @include h-w(100vh, 100vw);
+  position: absolute;
+  background-color: $color-blue;
+  color: white;
+  z-index: 10;
+
+  div {
+    @include flexbox(column, center, center);
+    transform: translateY(-25%);
+
+    h1 {
+      font-size: 100px;
+      font-family: 'Racing Sans One', cursive;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+  
+    input {
+      @include h-w(40px, 700px);
+      border: none;
+      border-radius: 20px;
+      margin-bottom: 30px;
+      padding-left: 20px;
+      padding-right: 40px;
+      color: rgb(77, 77, 77);
+      font-family: $font-kdam;
+      font-weight: 900;
+    }
+  
+    .search-icon {
+      @include h-w(30px, 30px);
+      background-color: $color-blue;
+      border: none;
+      border-radius: 20px;
+      transform: translateX(-35px) translateY(3px);
+      padding: 0;
+  
+      img {
+        cursor: pointer;
+        @include h-w(20px, 20px);
+      }
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: inline-block;
+        padding: 0 20px 0 20px;
+        font-size: 20px;
+        font-family: $font-kdam;
+        letter-spacing: 2px;
+      }
+  
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  
+}
+
 //////////
 // NAVBAR
 //////////
 .navbar {
+  @include h-w(90px, 100vw);
+
   position: absolute;
   top: 0;
+
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  column-gap: 40px;
+  align-items: center;
+  justify-content: flex-start;
+
   color: white;
-  background: linear-gradient(180deg, rgba(0,110,255,1) 90%, rgba(255,255,255,1) 93%, rgba(100,100,100,1) 100%);
-  padding: 0 40px 0 40px;
-  // box-shadow: 0px -5px 3px rgb(100, 100, 100) inset;
+  background: linear-gradient(180deg, $color-blue 95%, rgba(100,100,100,0.5) 95%, rgba(255,255,255,1) 100%);
+  padding: 0 200px 0 200px;
   z-index: 5;
-  @include h-w(90px, 100vw);
-  @include flexbox(row, center, flex-start);
-
-  img {
-    cursor: pointer;
-    @include h-w(30px, 30px);
-  }
-
-  .shopping-cart {
-    position: absolute;
-    right: 40px;
-    @include h-w(30px, 30px);
-  }
 
   h1 {
     font-size: 40px;
-    margin-left: 40px;
     font-family: 'Racing Sans One', cursive;
     cursor: pointer;
   }
 
   input {
-    margin-left: 40px;
-    @include h-w(40px, 1000px);
+    @include h-w(40px, 700px);
     border: none;
     border-radius: 20px;
     padding-left: 20px;
@@ -82,17 +144,38 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   }
 
   .search-icon {
+    @include h-w(30px, 30px);
     background-color: $color-blue;
     border: none;
     border-radius: 20px;
-    transform: translateX(-35px);
+    transform: translateX(-35px) translateY(3px);
     padding: 0;
-    @include h-w(30px, 30px);
 
     img {
       cursor: pointer;
       @include h-w(20px, 20px);
     }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      padding: 0 20px 0 20px;
+      font-size: 17px;
+      font-family: $font-kdam;
+      letter-spacing: 2px;
+    }
+
+    a {
+      cursor: pointer;
+    }
+  }
+  
+  .shopping-cart {
+    @include h-w(30px, 30px);
   }
 }
 
@@ -100,12 +183,13 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 // TagFilters
 //////////////
 .tag-filters {
+  @include h-w(calc(100vh - 90px), 250px);
   position: absolute;
   left: 0;
   top: 90px;
   background: linear-gradient(90deg, rgba(255,255,255,1) 97%, rgba(100,100,100,0.3) 97%, rgba(255,255,255,1) 100%);
   padding: 20px 40px 20px 40px;
-  @include h-w(calc(100vh - 90px), 250px);
+  margin-left: 160px;
 
   h1 {
     cursor: default;
@@ -128,14 +212,19 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   input {
     cursor: pointer;
   }
+
+  button {
+    cursor: pointer;
+    margin-top: 30px;
+  }
 }
 
 //////////////////
 // ItemContainers
 //////////////////
 .item-container {
+  @include h-w(calc(100vh - 90px), calc(100vw - 250px));
   position: absolute;
   left: 200px;
   top: 90px;
-  @include h-w(calc(100vh - 90px), calc(100vw - 250px));
 }
