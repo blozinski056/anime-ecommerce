@@ -37,6 +37,10 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   width: $width;
 }
 
+/////////////
+// ANIMATIONS
+/////////////
+
 ////////////
 // HOMEPAGE
 ////////////
@@ -47,6 +51,8 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   background-color: $color-blue;
   color: white;
   z-index: 10;
+  user-select: none;
+
 
   div {
     @include flexbox(column, center, center);
@@ -56,7 +62,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       font-size: 100px;
       font-family: 'Racing Sans One', cursive;
       margin-bottom: 20px;
-      cursor: pointer;
+      cursor: default;
     }
   
     input {
@@ -86,24 +92,45 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
     }
   
     ul {
+      @include flexbox(row, center, center);
       list-style: none;
       padding: 0;
   
       li {
-        display: inline-block;
         padding: 0 20px 0 20px;
         font-size: 20px;
         font-family: $font-kdam;
         letter-spacing: 2px;
-      }
-  
-      a {
         cursor: pointer;
+
+
+        .dropdown-list {
+          ul {
+            @include flexbox(column, center, center);
+            text-align: center;
+            width: 250px;
+            list-style: none;
+            position: absolute;
+            transform: translateY(50%);
+            padding: 10px;
+            cursor: default;
+    
+            li {
+              display: block;
+              font-size: 15px;
+              padding: 0;
+              width: 100%;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      li:hover {
+        background: linear-gradient(90deg, rgba(0,110,255,1) 0%, rgb(0, 85, 190) 30%, rgb(0, 85, 190) 70%, rgba(0,110,255,1) 100%);
       }
     }
   }
-
-  
 }
 
 //////////
@@ -111,10 +138,6 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 //////////
 .navbar {
   @include h-w(90px, 100vw);
-
-  position: absolute;
-  top: 0;
-
   display: grid;
   grid-template-columns: auto auto 1fr auto;
   column-gap: 40px;
@@ -158,73 +181,135 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   }
 
   ul {
+    @include flexbox(row, center, center);
     list-style: none;
     padding: 0;
 
     li {
-      display: inline-block;
+      @include flexbox(column, center, center);
       padding: 0 20px 0 20px;
-      font-size: 17px;
+      font-size: 20px;
       font-family: $font-kdam;
       letter-spacing: 2px;
+      cursor: pointer;
+
+
+      .dropdown-list {
+        ul {
+          @include flexbox(column, center, center);
+          text-align: center;
+          width: 250px;
+          list-style: none;
+          position: absolute;
+          transform: translateX(-50%);
+          padding: 10px;
+          cursor: default;
+          background-color: $color-blue;
+  
+          li {
+            display: block;
+            font-size: 15px;
+            padding: 0;
+            width: 100%;
+            cursor: pointer;
+          }
+        }
+      }
     }
 
-    a {
-      cursor: pointer;
+    li:hover {
+      background: linear-gradient(90deg, rgba(0,110,255,1) 0%, rgb(0, 85, 190) 30%, rgb(0, 85, 190) 70%, rgba(0,110,255,1) 100%);
     }
   }
   
   .shopping-cart {
     @include h-w(30px, 30px);
+    cursor: pointer;
   }
 }
 
-//////////////
-// TagFilters
-//////////////
-.tag-filters {
-  @include h-w(calc(100vh - 90px), 250px);
-  position: absolute;
-  left: 0;
-  top: 90px;
-  background: linear-gradient(90deg, rgba(255,255,255,1) 97%, rgba(100,100,100,0.3) 97%, rgba(255,255,255,1) 100%);
-  padding: 20px 40px 20px 40px;
-  margin-left: 160px;
+////////////////
+// SEARCH PAGE
+////////////////
+.search-page {
+  @include flexbox(row, flex-start, center);
+  @include h-w(auto, 100vw);
+  padding: 0px 200px 0px 200px;
 
-  h1 {
-    cursor: default;
-    font-size: 17px;
-    font-family: $font-kdam;
+  ///////////////
+  // TAG FILTERS
+  ///////////////
+  .tag-filters {
+    @include h-w(auto, 250px);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 97%, rgba(100,100,100,0.3) 97%, rgba(255,255,255,1) 100%);
+    padding: 20px 40px 20px 0px;
+    color: black;
+
+    h1 {
+      color: black;
+      cursor: default;
+      font-size: 17px;
+      font-family: $font-kdam;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+    
+    li {
+      cursor: default;
+      font-family: $font-kdam;
+      font-size: 13px;
+    }
+
+    input {
+      cursor: pointer;
+    }
+
+    button {
+      cursor: pointer;
+      margin-top: 30px;
+    }
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
+  ///////////////////
+  // ITEM CONTAINERS
+  ///////////////////
+  .item-container {
+    @include h-w(auto, calc(100vw - 250px));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-items: center;
+    text-align: center;
   }
+}
+
+
+/////////
+// TILES
+/////////
+.tiles {
+  @include flexbox(column, center, center);
+  @include h-w(300px, 300px);
+  padding: 20px;
   
-  li {
-    cursor: default;
-    font-family: $font-kdam;
-    font-size: 13px;
+  img {
+    @include h-w(200px, 200px);
+    object-fit: contain;
   }
 
-  input {
-    cursor: pointer;
-  }
+  .info-container {
+    @include flexbox(column, center, center);
+    font-size: 15px;
 
-  button {
-    cursor: pointer;
-    margin-top: 30px;
-  }
-}
+    .name {
+      color: black;
+    }
 
-//////////////////
-// ItemContainers
-//////////////////
-.item-container {
-  @include h-w(calc(100vh - 90px), calc(100vw - 250px));
-  position: absolute;
-  left: 200px;
-  top: 90px;
+    .price {
+      color: gray;
+    }
+  }
 }

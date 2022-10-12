@@ -1,11 +1,10 @@
 import React from "react"
-import data from "./data.js"
 
-export default function ItemContainer() {
+export default function ItemContainer({tilesArray}) {
 
   return (
     <section className="item-container">
-    
+      {tilesArray}
     </section>
   )
 }
