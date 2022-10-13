@@ -1,6 +1,10 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .homepage {
@@ -14,10 +18,6 @@
   background-color: rgb(0, 110, 255);
   color: white;
   z-index: 10;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 .homepage div {
   display: flex;
@@ -155,7 +155,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 20px 0 20px;
-  font-size: 20px;
+  font-size: 17px;
   font-family: "Kdam Thmor Pro", sans-serif;
   letter-spacing: 2px;
   cursor: pointer;
@@ -173,6 +173,7 @@
   padding: 10px;
   cursor: default;
   background-color: rgb(0, 110, 255);
+  opacity: 0.9;
 }
 .navbar ul li .dropdown-list ul li {
   display: block;
@@ -236,6 +237,7 @@
   grid-template-columns: repeat(auto-fill, 300px);
   justify-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .tiles {
@@ -248,10 +250,11 @@
   padding: 20px;
 }
 .tiles img {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   -o-object-fit: contain;
      object-fit: contain;
+  cursor: pointer;
 }
 .tiles .info-container {
   display: flex;
@@ -262,7 +265,9 @@
 }
 .tiles .info-container .name {
   color: black;
+  cursor: pointer;
 }
 .tiles .info-container .price {
   color: gray;
+  cursor: default;
 }/*# sourceMappingURL=App.css.map */

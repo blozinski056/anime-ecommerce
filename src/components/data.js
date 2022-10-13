@@ -309,19 +309,15 @@ export default [
     id: 51,
     title: "Cowboy Bebop: Spike Black and White Hoodie",
     price: 50,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-jacket-2.jpg",
-      "./images/merch/Cowboy-Bebop/cb-jacket-2b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-jacket-2.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-jacket-2b.jpg"
   },
   {
     id: 52,
     title: "Cowboy Bebop: Windbreaker",
     price: 60,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-jacket-3.jpg",
-      "./images/merch/Cowboy-Bebop/cb-jacket-3b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-jacket-3.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-jacket-3b.jpg"
   },
   {
     id: 53,
@@ -333,10 +329,8 @@ export default [
     id: 54,
     title: "Cowboy Bebop: Ed Emote Hoodie",
     price: 35,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-jacket-5.jpg",
-      "./images/merch/Cowboy-Bebop/cb-jacket-5b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-jacket-5.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-jacket-5b.jpg"
   },
   {
     id: 55,
@@ -360,19 +354,15 @@ export default [
     id: 58,
     title: "Cowboy Bebop: Ed T-Shirt",
     price: 25,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-shirt-3.jpg",
-      "./images/merch/Cowboy-Bebop/cb-shirt-3b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-shirt-3.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-shirt-3b.jpg"
   },
   {
     id: 59,
     title: "Cowboy Bebop: Gateway Shuffle T-Shirt",
     price: 25,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-shirt-4.jpg",
-      "./images/merch/Cowboy-Bebop/cb-shirt-4b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-shirt-4.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-shirt-4b.jpg"
   },
   {
     id: 60,
@@ -384,10 +374,8 @@ export default [
     id: 61,
     title: "Cowboy Bebop: Spike T-Shirt",
     price: 35,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-shirt-6.jpg",
-      "./images/merch/Cowboy-Bebop/cb-shirt-6b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-shirt-6.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-shirt-6b.jpg"
   },
   {
     id: 62,
@@ -423,10 +411,8 @@ export default [
     id: 67,
     title: "Cowboy Bebop: Ed Emotes Hat",
     price: 45,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-hat.jpg",
-      "./images/merch/Cowboy-Bebop/cb-hat-b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-hat.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-hat-b.jpg"
   },
   {
     id: 68,
@@ -486,10 +472,8 @@ export default [
     id: 77,
     title: "Cowboy Bebop: Utility Vest",
     price: 80,
-    image: [
-      "./images/merch/Cowboy-Bebop/cb-vest.jpg",
-      "./images/merch/Cowboy-Bebop/cb-vest-b.jpg"
-    ]
+    image: "./images/merch/Cowboy-Bebop/cb-vest.jpg",
+    image2: "./images/merch/Cowboy-Bebop/cb-vest-b.jpg"
   },
   ///////////////
   // DEMON SLAYER
@@ -645,10 +629,8 @@ export default [
     id: 102,
     title: "Dragon Ball: Windbreaker",
     price: 80,
-    image: [
-      "./images/merch/Dragon-Ball/db-jacket-2.jpg",
-      "./images/merch/Dragon-Ball/db-jacket-2b.jpg"
-    ]
+    image: "./images/merch/Dragon-Ball/db-jacket-2.jpg",
+    image2: "./images/merch/Dragon-Ball/db-jacket-2b.jpg"
   },
   {
     id: 103,
@@ -732,19 +714,15 @@ export default [
     id: 116,
     title: "Dragon Ball: Vegeta Longsleeve T-Shirt",
     price: 30,
-    image: [
-      "./images/merch/Dragon-Ball/db-shirt-6.jpg",
-      "./images/merch/Dragon-Ball/db-shirt-6b.jpg"
-    ]
+    image: "./images/merch/Dragon-Ball/db-shirt-6.jpg",
+    image2: "./images/merch/Dragon-Ball/db-shirt-6b.jpg"
   },
   {
     id: 117,
     title: "Dragon Ball: Goku Dragon Ball Z T-Shirt",
     price: 30,
-    image: [
-      "./images/merch/Dragon-Ball/db-shirt-7.jpg",
-      "./images/merch/Dragon-Ball/db-shirt-7b.jpg"
-    ]
+    image: "./images/merch/Dragon-Ball/db-shirt-7.jpg",
+    image2: "./images/merch/Dragon-Ball/db-shirt-7b.jpg"
   },
   {
     id: 118,
@@ -978,19 +956,15 @@ export default [
     id: 155,
     title: "Hunter x Hunter: Purple and Blue Split Hoodie",
     price: 70,
-    image: [
-      "./images/merch/HunterxHunter/hxh-jacket-5.jpg",
-      "./images/merch/HunterxHunter/hxh-jacket-5b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-jacket-5.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-jacket-5b.jpg"
   },
   {
     id: 156,
     title: "Hunter x Hunter: Red Hunter Hoodie",
     price: 70,
-    image: [
-      "./images/merch/HunterxHunter/hxh-jacket-6.jpg",
-      "./images/merch/HunterxHunter/hxh-jacket-6b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-jacket-6.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-jacket-6b.jpg"
   },
   {
     id: 157,
@@ -1014,10 +988,8 @@ export default [
     id: 160,
     title: "Hunter x Hunter: Gon and Killua T-Shirt",
     price: 40,
-    image: [
-      "./images/merch/HunterxHunter/hxh-shirt-4.jpg",
-      "./images/merch/HunterxHunter/hxh-shirt-4b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-shirt-4.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-shirt-4b.jpg"
   },
   {
     id: 161,
@@ -1041,10 +1013,8 @@ export default [
     id: 164,
     title: "Hunter x Hunter: Killua T-Shirt",
     price: 35,
-    image: [
-      "./images/merch/HunterxHunter/hxh-shirt-8.jpg",
-      "./images/merch/HunterxHunter/hxh-shirt-8b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-shirt-8.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-shirt-8b.jpg"
   },
   {
     id: 165,
@@ -1074,19 +1044,15 @@ export default [
     id: 169,
     title: "Hunter x Hunter: Sling Bag",
     price: 70,
-    image: [
-      "./images/merch/HunterxHunter/hxh-bag.jpg",
-      "./images/merch/HunterxHunter/hxh-bag-b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-bag.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-bag-b.jpg"
   },
   {
     id: 170,
     title: "Hunter x Hunter: Killua Beenie",
     price: 25,
-    image: [
-      "./images/merch/HunterxHunter/hxh-beenie.jpg",
-      "./images/merch/HunterxHunter/hxh-beenie-b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-beenie.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-beenie-b.jpg"
   },
   {
     id: 171,
@@ -1152,10 +1118,8 @@ export default [
     id: 181,
     title: "Hunter x Hunter: Utility Vest",
     price: 35,
-    image: [
-      "./images/merch/HunterxHunter/hxh-vest.jpg",
-      "./images/merch/HunterxHunter/hxh-vest-b.jpg"
-    ]
+    image: "./images/merch/HunterxHunter/hxh-vest.jpg",
+    image2: "./images/merch/HunterxHunter/hxh-vest-b.jpg"
   },
   /////////////////
   // JUJUTSU KAISEN
@@ -1488,10 +1452,8 @@ export default [
     id: 235,
     title: "Naruto: Uchiha Clan Basketball Jersey",
     price: 70,
-    image: [
-      "./images/merch/Naruto/nar-shirt.jpg",
-      "./images/merch/Naruto/nar-shirt-b.jpg"
-    ]
+    image: "./images/merch/Naruto/nar-shirt.jpg",
+    image2: "./images/merch/Naruto/nar-shirt-b.jpg"
   },
   {
     id: 236,
@@ -1566,10 +1528,8 @@ export default [
     id: 247,
     title: "One Piece: Logo and Luffy Hoodie",
     price: 40,
-    image: [
-      "./images/merch/One-Piece/op-jacket-2.jpg",
-      "./images/merch/One-Piece/op-jacket-2b.jpg"
-    ]
+    image: "./images/merch/One-Piece/op-jacket-2.jpg",
+    image2: "./images/merch/One-Piece/op-jacket-2b.jpg"
   },
   {
     id: 248,
@@ -1710,10 +1670,8 @@ export default [
     id: 270,
     title: "Pokemon: Pikachu Hoodie",
     price: 45,
-    image: [
-      "./images/merch/Pokemon/pok-jacket-2.jpg",
-      "./images/merch/Pokemon/pok-jacket-2b.jpg"
-    ]
+    image: "./images/merch/Pokemon/pok-jacket-2.jpg",
+    image2: "./images/merch/Pokemon/pok-jacket-2b.jpg"
   },
   {
     id: 271,

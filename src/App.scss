@@ -14,6 +14,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 /////////////
@@ -51,8 +52,6 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   background-color: $color-blue;
   color: white;
   z-index: 10;
-  user-select: none;
-
 
   div {
     @include flexbox(column, center, center);
@@ -188,7 +187,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
     li {
       @include flexbox(column, center, center);
       padding: 0 20px 0 20px;
-      font-size: 20px;
+      font-size: 17px;
       font-family: $font-kdam;
       letter-spacing: 2px;
       cursor: pointer;
@@ -205,6 +204,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
           padding: 10px;
           cursor: default;
           background-color: $color-blue;
+          opacity: 0.9;
   
           li {
             display: block;
@@ -283,6 +283,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
     grid-template-columns: repeat(auto-fill, 300px);
     justify-items: center;
     text-align: center;
+    padding: 20px;
   }
 }
 
@@ -296,8 +297,9 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   padding: 20px;
   
   img {
-    @include h-w(200px, 200px);
+    @include h-w(250px, 250px);
     object-fit: contain;
+    cursor: pointer;
   }
 
   .info-container {
@@ -306,10 +308,12 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 
     .name {
       color: black;
+      cursor: pointer;
     }
 
     .price {
       color: gray;
+      cursor: default;
     }
   }
 }

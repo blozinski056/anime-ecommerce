@@ -10,7 +10,7 @@ import data from "./components/data.js"
 export default function App() {
   const [showHomePage, setShowHomePage] = React.useState(true);
   const [searchOn, setSearchOn] = React.useState(false);
-  const [keyword, setKeyword] = React.useState("");
+  const [filteredTiles, setFilteredTiles] = React.useState([]);
 
   const allTiles = data.map((item) => {
     return(
@@ -23,21 +23,68 @@ export default function App() {
     )
   })
 
-  function filteredTiles(searchWord) {
-    let ft = allTiles;
-
-    console.log(searchWord);
-
-    if(searchWord === "") {
-      return ft;
+  // Helper function filters list of tiles based on user input word
+  function filtering(word, listOfTiles) {
+    let f = [];
+    if(word === "OTHER ANIME") {
+      listOfTiles.forEach((tile) => {
+        let name = tile.props.name;
+        if(!name.includes("Attack on Titan") &&
+          !name.includes("Cowboy Bebop") &&
+          !name.includes("Demon Slayer") &&
+          !name.includes("Dragon Ball") &&
+          !name.includes("Fullmetal Alchemist") &&
+          !name.includes("Hunter x Hunter") &&
+          !name.includes("Jujutsu Kaisen") &&
+          !name.includes("My Hero Academia") &&
+          !name.includes("Naruto") &&
+          !name.includes("One Piece") &&
+          !name.includes("Pokemon") &&
+          !name.includes("Studio Ghibli")) {
+            f.push(tile);
+          }
+      })
+    } else if(word === "OTHER MERCH") {
+      listOfTiles.forEach((tile) => {
+        let name = tile.props.name;
+        if(!name.includes("Crewneck") &&
+          !name.includes("Figurine") &&
+          !name.includes("Hoodie") &&
+          !name.includes("Poster") &&
+          !name.includes("Shirt") &&
+          !name.includes("Ugly Christmas Sweater")) {
+            f.push(tile);
+          }
+      })
+    } else if(word === "") {
+      f = listOfTiles;
     } else {
-      return ft = allTiles.map((tile) => {
+      listOfTiles.forEach((tile) => {
         let name = tile.props.name.toUpperCase();
-        if(name.includes(searchWord)) {
-          return tile;
+        if(name.includes(word)) {
+          f.push(tile);
         }
       })
     }
+
+    console.log(f);
+    return f;
+  }
+
+  // Used when search bar is activated
+  function searchedTiles(searchWord) {
+    console.log(searchWord);
+
+    const ft = filtering(searchWord, allTiles);
+    // check if list of tiles is 0
+    setFilteredTiles(ft);
+  }
+
+  // Used when filter tab is activated
+  function filterTiles(checkArray) {
+    checkArray.map((word) => {
+      setFilteredTiles(filtering(word, filteredTiles));
+    })
   }
 
   return (
@@ -47,7 +94,7 @@ export default function App() {
         <HomePage 
           setShowHomePage={setShowHomePage}
           setSearchOn={setSearchOn}
-          setKeyword={setKeyword}
+          searchedTiles={searchedTiles}
         />
       }
 
@@ -55,19 +102,20 @@ export default function App() {
       <Navbar 
         setShowHomePage={setShowHomePage}
         setSearchOn={setSearchOn}
-        keyword={keyword}
-        setKeyword={setKeyword}
+        searchedTiles={searchedTiles}
       />
 
       {/* SEARCH PAGE */}
       {searchOn &&
         <section className="search-page">
           {/* Side tab to sort by keywords/tags; make glass effect */}
-          <TagFilters />
+          <TagFilters 
+            filterTiles={filterTiles}
+          />
           
           {/* Determine which tiles to be displayed before passing */}
           <ItemContainer 
-            tilesArray={filteredTiles(keyword)}
+            tilesArray={filteredTiles}
           />
         </section>
       }

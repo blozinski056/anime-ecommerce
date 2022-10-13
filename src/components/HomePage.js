@@ -1,24 +1,35 @@
 import React from "react"
 
-export default function HomePage({setShowHomePage, setSearchOn, setKeyword}) {
+export default function HomePage({setShowHomePage, setSearchOn, searchedTiles}) {
   const [showAnime, setShowAnime] = React.useState(false);
   const [showMerch, setShowMerch] = React.useState(false);
 
+  // Used when user inputs words in search bar
   function searchKeyword(event) {
     event.preventDefault();
 
     const keyword = document.querySelector(".search-bar").value.toUpperCase();
-    setKeyword(keyword);
+    searchedTiles(keyword);
 
     searchPage();
   }
 
+  // Used when user clicks on drop down item
+  function searchCategory(category) {
+    const keyword = category.toUpperCase();
+    searchedTiles(keyword);
+    
+    searchPage();
+  }
+
+  // Used when Shop All is clicked
   function shopAll() {
-    setKeyword("");
+    searchedTiles("");
 
     searchPage();
   }
 
+  // Helper function to transition to search page
   function searchPage() {
     // TRANSITION HOME PAGE UP AND FADE
     setShowHomePage(false);
@@ -51,19 +62,19 @@ export default function HomePage({setShowHomePage, setSearchOn, setKeyword}) {
             {showAnime &&
               <div className="dropdown-list">
                 <ul>
-                  <li>Attack on Titan</li>
-                  <li>Cowboy Bebop</li>
-                  <li>Demon Slayer</li>
-                  <li>Dragon Ball</li>
-                  <li>Fullmetal Alchemist</li>
-                  <li>Hunter x Hunter</li>
-                  <li>Jujutsu Kaisen</li>
-                  <li>My Hero Academia</li>
-                  <li>Naruto</li>
-                  <li>One Piece</li>
-                  <li>Pokemon</li>
-                  <li>Studio Ghibli</li>
-                  <li>(Other)</li>
+                  <li onClick={() => searchCategory("Attack on Titan")}>Attack on Titan</li>
+                  <li onClick={() => searchCategory("Cowboy Bebop")}>Cowboy Bebop</li>
+                  <li onClick={() => searchCategory("Demon Slayer")}>Demon Slayer</li>
+                  <li onClick={() => searchCategory("Dragon Ball")}>Dragon Ball</li>
+                  <li onClick={() => searchCategory("Fullmetal Alchemist")}>Fullmetal Alchemist</li>
+                  <li onClick={() => searchCategory("Hunter x Hunter")}>Hunter x Hunter</li>
+                  <li onClick={() => searchCategory("Jujutsu Kaisen")}>Jujutsu Kaisen</li>
+                  <li onClick={() => searchCategory("My Hero Academia")}>My Hero Academia</li>
+                  <li onClick={() => searchCategory("Naruto")}>Naruto</li>
+                  <li onClick={() => searchCategory("One Piece")}>One Piece</li>
+                  <li onClick={() => searchCategory("Pokemon")}>Pokemon</li>
+                  <li onClick={() => searchCategory("Studio Ghibli")}>Studio Ghibli</li>
+                  <li onClick={() => searchCategory("Other Anime")}>(Other)</li>
                 </ul>
               </div>
             }
@@ -75,10 +86,13 @@ export default function HomePage({setShowHomePage, setSearchOn, setKeyword}) {
             {showMerch &&
               <div className="dropdown-list">
                 <ul>
-                  <li>Hoodies/Sweatshirts</li>
-                  <li>Posters</li>
-                  <li>Shirts</li>
-                  <li>(Other)</li>
+                  <li onClick={() => searchCategory("Crewneck")}>Crewnecks</li>
+                  <li onClick={() => searchCategory("Figurine")}>Figurines</li>
+                  <li onClick={() => searchCategory("Hoodie")}>Hoodies</li>
+                  <li onClick={() => searchCategory("Poster")}>Posters</li>
+                  <li onClick={() => searchCategory("Shirt")}>Shirts</li>
+                  <li onClick={() => searchCategory("Ugly Christmas Sweater")}>Ugly Christmas Sweaters</li>
+                  <li onClick={() => searchCategory("Other Merch")}>(Other)</li>
                 </ul>
               </div>
             }
