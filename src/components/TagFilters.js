@@ -1,45 +1,90 @@
 import React from "react"
 
-export default function TagFilters({filterTiles}) {
+export default function TagFilters({filterTiles, keyword, category, updateToggle}) {
+  const [minPrice, setMinPrice] = React.useState(0);
+  const [maxPrice, setMaxPrice] = React.useState(0);
+  const animeFilters = [
+    "ATTACK ON TITAN",
+    "COWBOY BEBOP",
+    "DEMON SLAYER",
+    "DRAGON BALL",
+    "FULLMETAL ALCHEMIST",
+    "HUNTER X HUNTER",
+    "JUJUTSU KAISEN",
+    "MY HERO ACADEMIA",
+    "NARUTO",
+    "ONE PIECE",
+    "POKEMON",
+    "STUDIO GHIBLI",
+    "OTHER ANIME"
+  ]
+  const merchFilters = [
+    "CREWNECK",
+    "FIGURINE",
+    "HOODIE",
+    "POSTER",
+    "SHIRT",
+    "UGLY CHRISTMAS SWEATER",
+    "OTHER MERCH",
+  ]
 
+  // Update checked filter whenever keyword changes
+  React.useEffect(() => {
+    // Reset values
+    animeFilters.forEach((anime) => {
+      document.querySelector('[name="' + CSS.escape(anime) + '"]').checked = false;
+    })
+    merchFilters.forEach((merch) => {
+      document.querySelector('[name="' + CSS.escape(merch) + '"]').checked = false;
+    })
+    setMinPrice(0);
+    setMaxPrice(0);
+    document.querySelector(".min-price").value = '';
+    document.querySelector(".max-price").value = '';
+    document.querySelector(".max-price").min = 0;
+    // Check filter based on keyword
+    if(animeFilters.includes(category) || merchFilters.includes(category)) {
+      document.querySelector('[name="' + CSS.escape(category) + '"]').checked = true;
+    }
+    if(animeFilters.includes(keyword) || merchFilters.includes(keyword)) {
+      document.querySelector('[name="' + CSS.escape(keyword) + '"]').checked = true;
+    }
+  }, [category, keyword, updateToggle])
 
   function getInputs(event) {
     event.preventDefault();
+    let animeWords = [];
+    let merchWords = [];
+    let priceRange = [minPrice, maxPrice];
+    animeFilters.forEach((anime) => {
+      const a = document.querySelector('[name="' + CSS.escape(anime) + '"]');
+      if(a.checked) {
+        animeWords.push(anime);
+      }
+    })
+    merchFilters.forEach((merch) => {
+      const m = document.querySelector('[name="' + CSS.escape(merch) + '"]');
+      if(m.checked) {
+        merchWords.push(merch);
+      }
+    })
 
-    const checkFilters = [
-      {name: "Attack on Titan", value: document.querySelector(".aot").checked},
-      {name: "Cowboy Bebop", value: document.querySelector(".cb").checked},
-      {name: "Demon Slayer", value: document.querySelector(".ds").checked},
-      {name: "Dragon Ball", value: document.querySelector(".db").checked},
-      {name: "Fullmetal Alchemist", value: document.querySelector(".fma").checked},
-      {name: "Hunter x Hunter", value: document.querySelector(".hxh").checked},
-      {name: "Jujutsu Kaisen", value: document.querySelector(".jjk").checked},
-      {name: "My Hero Academia", value: document.querySelector(".mha").checked},
-      {name: "Naruto", value: document.querySelector(".nar").checked},
-      {name: "One Piece", value: document.querySelector(".op").checked},
-      {name: "Pokemon", value: document.querySelector(".pok").checked},
-      {name: "Studio Ghibli", value: document.querySelector(".sg").checked},
-      {name: "Other Anime", value: document.querySelector(".other-anime").checked},
-      {name: "Crewneck", value: document.querySelector(".crewnecks").checked},
-      {name: "Figurine", value: document.querySelector(".figurines").checked},
-      {name: "Hoodie", value: document.querySelector(".hoodies").checked},
-      {name: "Poster", value: document.querySelector(".posters").checked},
-      {name: "Shirt", value: document.querySelector(".shirts").checked},
-      {name: "Ugly Christmas Sweater", value: document.querySelector(".ucs").checked},
-      {name: "Other Merch", value: document.querySelector(".other-merch").checked}
-    ]
+    console.log(animeWords);
+    console.log(merchWords);
+    console.log(priceRange[0] + ", " + priceRange[1]);
+    filterTiles(keyword, animeWords, merchWords, priceRange);
+  }
 
-    let checkedWords = [];
+  function minPriceVal(event) {
+    const min = event.target.value;
+    const mp = document.querySelector(".max-price");
+    mp.min = min;
+    setMinPrice(min);
+  }
 
-    for(let i = 0; i < checkFilters.length; i++) {
-        if(checkFilters[i].value) {
-          checkedWords.push(checkFilters[i].name.toUpperCase());
-        }
-    }
-
-    console.log(checkedWords);
-
-    filterTiles(checkedWords);
+  function maxPriceVal(event) {
+    const max = event.target.value;
+    setMaxPrice(max);
   }
 
   return (
@@ -47,38 +92,39 @@ export default function TagFilters({filterTiles}) {
       <form onSubmit={getInputs}>
         <ul className="anime">
           <h1>Anime</h1>
-          <li><input className="aot" type="checkbox" /> Attack on Titan</li>
-          <li><input className="cb" type="checkbox" /> Cowboy Bebop</li>
-          <li><input className="ds" type="checkbox" /> Demon Slayer</li>
-          <li><input className="db" type="checkbox" /> Dragon Ball</li>
-          <li><input className="fma" type="checkbox" /> Fullmetal Alchemist</li>
-          <li><input className="hxh" type="checkbox" /> Hunter x Hunter</li>
-          <li><input className="jjk" type="checkbox" /> Jujutsu Kaisen</li>
-          <li><input className="mha" type="checkbox" /> My Hero Academia</li>
-          <li><input className="nar" type="checkbox" /> Naruto</li>
-          <li><input className="op" type="checkbox" /> One Piece</li>
-          <li><input className="pok" type="checkbox" /> Pokemon</li>
-          <li><input className="sg" type="checkbox" /> Studio Ghibli</li>
-          <li><input className="other-anime" type="checkbox" /> (Other)</li>
+          <li><label><input name="ATTACK ON TITAN" type="checkbox" /> Attack on Titan</label></li>
+          <li><label><input name="COWBOY BEBOP" type="checkbox" /> Cowboy Bebop</label></li>
+          <li><label><input name="DEMON SLAYER" type="checkbox" /> Demon Slayer</label></li>
+          <li><label><input name="DRAGON BALL" type="checkbox" /> Dragon Ball</label></li>
+          <li><label><input name="FULLMETAL ALCHEMIST" type="checkbox" /> Fullmetal Alchemist</label></li>
+          <li><label><input name="HUNTER X HUNTER" type="checkbox" /> Hunter x Hunter</label></li>
+          <li><label><input name="JUJUTSU KAISEN" type="checkbox" /> Jujutsu Kaisen</label></li>
+          <li><label><input name="MY HERO ACADEMIA" type="checkbox" /> My Hero Academia</label></li>
+          <li><label><input name="NARUTO" type="checkbox" /> Naruto</label></li>
+          <li><label><input name="ONE PIECE" type="checkbox" /> One Piece</label></li>
+          <li><label><input name="POKEMON" type="checkbox" /> Pokemon</label></li>
+          <li><label><input name="STUDIO GHIBLI" type="checkbox" /> Studio Ghibli</label></li>
+          <li><label><input name="OTHER ANIME" type="checkbox" /> (Other)</label></li>
         </ul>
-
-        <ul className="merch-type">
+        <ul className="merch">
           <h1>Type of Merchandise</h1>
-          <li><input className="crewnecks" type="checkbox" /> Crewnecks</li>
-          <li><input className="figurines" type="checkbox" /> Figurines</li>
-          <li><input className="hoodies" type="checkbox" /> Hoodies</li>
-          <li><input className="posters" type="checkbox" /> Posters</li>
-          <li><input className="shirts" type="checkbox" /> Shirts</li>
-          <li><input className="ucs" type="checkbox" /> Ugly Christmas Sweaters</li>
-          <li><input className="other-merch" type="checkbox" /> (Other)</li>
+          <li><label><input name="CREWNECK" type="checkbox" /> Crewnecks</label></li>
+          <li><label><input name="FIGURINE" type="checkbox" /> Figurines</label></li>
+          <li><label><input name="HOODIE" type="checkbox" /> Hoodies</label></li>
+          <li><label><input name="POSTER" type="checkbox" /> Posters</label></li>
+          <li><label><input name="SHIRT" type="checkbox" /> Shirts</label></li>
+          <li><label><input name="UGLY CHRISTMAS SWEATER" type="checkbox" /> Ugly Christmas Sweaters</label></li>
+          <li><label><input name="OTHER MERCH" type="checkbox" /> (Other)</label></li>
         </ul>
-
-        <ul>
-          <h1>Price Range</h1>
-          <input placeholder="Min $" />
-          <input placeholder="Max $" />
-        </ul>
-
+        <h1>Price Range</h1>
+        <div>
+          <span>Min. Price:</span>
+          <input className="min-price" onChange={minPriceVal} min={0} type="number" placeholder="Min $" />
+        </div>
+        <div>
+          <span>Max. Price:</span>
+          <input className="max-price" onChange={maxPriceVal} min={0} type="number" placeholder="Max $" />
+        </div>
         <button type="submit">Apply</button>
       </form>
     </section>

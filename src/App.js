@@ -11,6 +11,9 @@ export default function App() {
   const [showHomePage, setShowHomePage] = React.useState(true);
   const [searchOn, setSearchOn] = React.useState(false);
   const [filteredTiles, setFilteredTiles] = React.useState([]);
+  const [keyword, setKeyword] = React.useState("");
+  const [category, setCategory] = React.useState("");
+  const [updateToggle, setUpdateToggle] = React.useState(true);
 
   const allTiles = data.map((item) => {
     return(
@@ -23,7 +26,7 @@ export default function App() {
     )
   })
 
-  // Helper function filters list of tiles based on user input word
+  // Returns new array based on keyword
   function filtering(word, listOfTiles) {
     let f = [];
     if(word === "OTHER ANIME") {
@@ -66,25 +69,60 @@ export default function App() {
         }
       })
     }
-
+    console.log("from filter function:");
     console.log(f);
     return f;
   }
 
   // Used when search bar is activated
-  function searchedTiles(searchWord) {
-    console.log(searchWord);
+  // function searchedTiles(searchWord) {
+  //   console.log(searchWord);
 
-    const ft = filtering(searchWord, allTiles);
-    // check if list of tiles is 0
-    setFilteredTiles(ft);
-  }
+  //   const ft = filtering(searchWord, allTiles);
+  //   // check if list of tiles is 0
+  //   setFilteredTiles(ft);
+  // }
 
   // Used when filter tab is activated
-  function filterTiles(checkArray) {
-    checkArray.map((word) => {
-      setFilteredTiles(filtering(word, filteredTiles));
-    })
+  function filterTiles(searchWord, animeWords, merchWords, priceRange) {
+    console.log(searchWord, animeWords, merchWords, priceRange);
+    let filtered = filtering(searchWord, allTiles);
+    console.log("after search word");
+    console.log(filtered);
+    if(animeWords.length > 0) {
+      console.log("anime start");
+      let tempArray = [];
+      animeWords.forEach((word) => {
+        tempArray = tempArray.concat(filtering(word, filtered));
+      })
+      filtered = tempArray;
+      console.log("anime end");
+      console.log(filtered);
+    }
+    if(merchWords.length > 0) {
+      console.log("merch start");
+      let tempArray = [];
+      merchWords.forEach((word) => {
+        tempArray = tempArray.concat(filtering(word, filtered));
+      })
+      filtered = tempArray;
+      console.log("merch end");
+      console.log(filtered);
+    }
+    if(priceRange[0] || priceRange[1]) {
+      let min, max;
+      priceRange[0] ? min = priceRange[0] : min = 0;
+      priceRange[1] ? max = priceRange[1] : max = Number.MAX_SAFE_INTEGER;
+      let tempArray = [];
+      filtered.forEach((tile) => {
+        if(tile.props.price >= min && tile.props.price <= max) {
+          tempArray.push(tile);
+        }
+      })
+      filtered = tempArray;
+    }
+
+    setFilteredTiles(filtered);
   }
 
   return (
@@ -94,7 +132,12 @@ export default function App() {
         <HomePage 
           setShowHomePage={setShowHomePage}
           setSearchOn={setSearchOn}
-          searchedTiles={searchedTiles}
+          // searchedTiles={searchedTiles}
+          filterTiles={filterTiles}
+          setKeyword={setKeyword}
+          setCategory={setCategory}
+          updateToggle={updateToggle}
+          setUpdateToggle={setUpdateToggle}
         />
       }
 
@@ -102,7 +145,12 @@ export default function App() {
       <Navbar 
         setShowHomePage={setShowHomePage}
         setSearchOn={setSearchOn}
-        searchedTiles={searchedTiles}
+        // searchedTiles={searchedTiles}
+        filterTiles={filterTiles}
+        setKeyword={setKeyword}
+        setCategory={setCategory}
+        updateToggle={updateToggle}
+        setUpdateToggle={setUpdateToggle}
       />
 
       {/* SEARCH PAGE */}
@@ -111,8 +159,10 @@ export default function App() {
           {/* Side tab to sort by keywords/tags; make glass effect */}
           <TagFilters 
             filterTiles={filterTiles}
+            keyword={keyword}
+            category={category}
+            updateToggle={updateToggle}
           />
-          
           {/* Determine which tiles to be displayed before passing */}
           <ItemContainer 
             tilesArray={filteredTiles}

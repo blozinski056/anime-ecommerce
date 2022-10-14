@@ -250,28 +250,49 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       cursor: default;
       font-size: 17px;
       font-family: $font-kdam;
+      margin-top: 10px;
     }
 
     ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
-    }
-    
-    li {
-      cursor: default;
-      font-family: $font-kdam;
-      font-size: 13px;
+
+      li {
+        cursor: default;
+        font-family: $font-kdam;
+        font-size: 13px;
+  
+        input, label {
+          cursor: pointer;
+        }
+      }
     }
 
-    input {
-      cursor: pointer;
+    div {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      font-family: $font-kdam;
+      font-size: 13px;
+
+      input {
+        @include h-w(auto, 4em);
+      }
+    }
+
+    .min-price, .max-price {
+      cursor: text;
     }
 
     button {
       cursor: pointer;
       margin-top: 30px;
     }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   ///////////////////
