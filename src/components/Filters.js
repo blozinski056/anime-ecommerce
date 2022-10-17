@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function TagFilters({filterTiles, keyword, category, updateToggle}) {
+export default function Filters({filterTiles, keyword, category, updateToggle}) {
   const [minPrice, setMinPrice] = React.useState(0);
   const [maxPrice, setMaxPrice] = React.useState(0);
   const animeFilters = [
@@ -88,7 +88,7 @@ export default function TagFilters({filterTiles, keyword, category, updateToggle
   }
 
   return (
-    <section className="tag-filters">
+    <section className="filters">
       <form onSubmit={getInputs}>
         <ul className="anime">
           <h1>Anime</h1>

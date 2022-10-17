@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function HomePage({setShowHomePage, setSearchOn, filterTiles, setKeyword, setCategory, updateToggle, setUpdateToggle}) {
+export default function HomePage({openSearch, filterTiles, setKeyword, setCategory}) {
   const [showAnime, setShowAnime] = React.useState(false);
   const [showMerch, setShowMerch] = React.useState(false);
 
@@ -11,7 +11,7 @@ export default function HomePage({setShowHomePage, setSearchOn, filterTiles, set
     filterTiles(word, [], [], []);
     setKeyword(word);
     setCategory("");
-    searchPage();
+    openSearch();
   }
 
   // Used when user clicks on drop down item
@@ -20,7 +20,7 @@ export default function HomePage({setShowHomePage, setSearchOn, filterTiles, set
     category === "anime" ? filterTiles("", [word], [], []) : filterTiles("", [], [word], []);
     setKeyword("");
     setCategory(word);
-    searchPage();
+    openSearch();
   }
 
   // Used when Shop All is clicked
@@ -28,15 +28,7 @@ export default function HomePage({setShowHomePage, setSearchOn, filterTiles, set
     filterTiles("", [], [], []);
     setKeyword("");
     setCategory("");
-    searchPage();
-  }
-
-  // Helper function to transition to search page
-  function searchPage() {
-    // TRANSITION HOME PAGE UP AND FADE
-    setShowHomePage(false);
-    setSearchOn(true);
-    setUpdateToggle(!updateToggle);
+    openSearch();
   }
 
   return (

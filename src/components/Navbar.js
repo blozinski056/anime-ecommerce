@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKeyword, setCategory, updateToggle, setUpdateToggle}) {
+export default function Navbar({openSearch, openHome, filterTiles, setKeyword, setCategory, cart, openCart}) {
   const [showAnime, setShowAnime] = React.useState(false);
   const [showMerch, setShowMerch] = React.useState(false);
 
@@ -11,20 +11,17 @@ export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKe
     filterTiles(word, [], [], []);
     setKeyword(word);
     setCategory("");
-    setSearchOn(true);
-    setUpdateToggle(!updateToggle);
+    openSearch();
   }
 
   // Used when user clicks on drop down item
   function searchCategory(name, category) {
     const word = name.toUpperCase();
     category === "anime" ? filterTiles("", [word], [], []) : filterTiles("", [], [word], []);
-    // setKeyword(word);
     document.querySelector(".search-bar").value = "";
     setKeyword("");
     setCategory(word);
-    setSearchOn(true);
-    setUpdateToggle(!updateToggle);
+    openSearch();
   }
 
   // Used when user clicks on website logo
@@ -32,22 +29,20 @@ export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKe
     // TRANSITION TO HOME PAGE
     setKeyword("");
     setCategory("");
-    setSearchOn(false);
-    setShowHomePage(true);
+    openHome();
   }
 
   // Used when user clicks on Shop All
   function shopAll() {
-    setSearchOn(true);
+    openSearch();
     filterTiles("", [], [], []);
     setKeyword("");
     setCategory("");
     document.querySelector(".search-bar").value = "";
-    setUpdateToggle(!updateToggle);
   }
 
   return (
-    <div className="navbar">
+    <section className="navbar">
       {/* TITLE */}
       <h1 onClick={home}>WeebSite</h1>
       {/* SEARCH BAR */}
@@ -60,9 +55,9 @@ export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKe
       {/* BUTTONS */}
       <ul>
           {/* Shop all items */}
-          <li><a onClick={shopAll}>SHOP ALL</a></li>
+          <li className="shop-all"><a onClick={shopAll}>SHOP ALL</a></li>
           {/* Shop by anime */}
-          <li className="anime-dropdown" onMouseLeave={() => setShowAnime(false)}>
+          <li className="anime" onMouseLeave={() => setShowAnime(false)}>
             <a onMouseOver={() => setShowAnime(true)}>ANIME</a>
             {showAnime &&
               <div className="dropdown-list">
@@ -85,7 +80,7 @@ export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKe
             }
           </li>
           {/* Shop by type of merchandise */}
-          <li className="merch-dropdown" onMouseLeave={() => setShowMerch(false)}>
+          <li className="merch" onMouseLeave={() => setShowMerch(false)}>
             <a onMouseOver={() => setShowMerch(true)}>MERCHANDISE</a>
             {showMerch &&
               <div className="dropdown-list">
@@ -103,7 +98,12 @@ export default function Navbar({setShowHomePage, setSearchOn, filterTiles, setKe
           </li>
         </ul>
       {/* SHOPPING CART */}
-      <img className="shopping-cart" src="./images/shopping-cart-white.png" />
-    </div>
+      <div className="shopping-cart" onClick={openCart}>
+        <img className="cart-image" src="./images/shopping-cart-white.png" />
+        {cart.length > 0 &&
+          <div className="cart-quantity">{cart.length}</div>
+        }
+      </div>
+    </section>
   )
 }

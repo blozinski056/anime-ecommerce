@@ -3,18 +3,23 @@ import "./App.css"
 import HomePage from "./components/HomePage.js"
 import Navbar from "./components/Navbar.js"
 import ItemContainer from "./components/ItemContainer.js"
-import TagFilters from "./components/TagFilters.js"
+import Filters from "./components/Filters.js"
 import Tiles from "./components/Tiles.js"
+import DescriptionPage from "./components/DescriptionPage.js"
+import ShoppingCartPage from "./components/ShoppingCartPage.js"
 import data from "./components/data.js"
 
 export default function App() {
-  const [showHomePage, setShowHomePage] = React.useState(true);
-  const [searchOn, setSearchOn] = React.useState(false);
+  const [showHome, setShowHome] = React.useState(true);
+  const [showSearch, setShowSearch] = React.useState(false);
+  const [showDesc, setShowDesc] = React.useState(false);
+  const [showCart, setShowCart] = React.useState(false);
   const [filteredTiles, setFilteredTiles] = React.useState([]);
   const [keyword, setKeyword] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [updateToggle, setUpdateToggle] = React.useState(true);
-
+  const [descInfo, setDescInfo] = React.useState({image: "", name: "", price: ""});
+  const [cart, setCart] = React.useState([]);
   const allTiles = data.map((item) => {
     return(
       <Tiles
@@ -22,9 +27,14 @@ export default function App() {
         name={item.title}
         price={item.price}
         image={item.image}
+        openDescPage={openDescPage}
       />
     )
   })
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [updateToggle])
 
   // Returns new array based on keyword
   function filtering(word, listOfTiles) {
@@ -69,45 +79,25 @@ export default function App() {
         }
       })
     }
-    console.log("from filter function:");
-    console.log(f);
     return f;
   }
 
-  // Used when search bar is activated
-  // function searchedTiles(searchWord) {
-  //   console.log(searchWord);
-
-  //   const ft = filtering(searchWord, allTiles);
-  //   // check if list of tiles is 0
-  //   setFilteredTiles(ft);
-  // }
-
   // Used when filter tab is activated
   function filterTiles(searchWord, animeWords, merchWords, priceRange) {
-    console.log(searchWord, animeWords, merchWords, priceRange);
     let filtered = filtering(searchWord, allTiles);
-    console.log("after search word");
-    console.log(filtered);
     if(animeWords.length > 0) {
-      console.log("anime start");
       let tempArray = [];
       animeWords.forEach((word) => {
         tempArray = tempArray.concat(filtering(word, filtered));
       })
       filtered = tempArray;
-      console.log("anime end");
-      console.log(filtered);
     }
     if(merchWords.length > 0) {
-      console.log("merch start");
       let tempArray = [];
       merchWords.forEach((word) => {
         tempArray = tempArray.concat(filtering(word, filtered));
       })
       filtered = tempArray;
-      console.log("merch end");
-      console.log(filtered);
     }
     if(priceRange[0] || priceRange[1]) {
       let min, max;
@@ -125,53 +115,99 @@ export default function App() {
     setFilteredTiles(filtered);
   }
 
+  function addToCart(itemImage, itemName, itemPrice) {
+    setCart((prevCart) => [...prevCart, {image: itemImage, name: itemName, price: itemPrice}]);
+  }
+  
+  function openHome() {
+    setShowHome(true);
+    setShowSearch(false);
+    setShowDesc(false);
+    setShowCart(false);
+    setUpdateToggle(!updateToggle);
+  }
+
+  function openSearch() {
+    setShowHome(false);
+    setShowSearch(true);
+    setShowDesc(false);
+    setShowCart(false);
+    setUpdateToggle(!updateToggle);
+  }
+
+  function openDescPage(descImg, descName, descPrice) {
+    setDescInfo({image: descImg, name: descName, price: descPrice});
+    setShowHome(false);
+    setShowSearch(false);
+    setShowDesc(true);
+    setShowCart(false);
+    document.querySelector(".search-bar").value = "";
+    setUpdateToggle(!updateToggle);
+  }
+
+  function openCart() {
+    setShowSearch(false);
+    setShowDesc(false);
+    setShowCart(true);
+    document.querySelector(".search-bar").value = "";
+    setUpdateToggle(!updateToggle);
+  }
+
   return (
     <div>
       {/* HOME PAGE */}
-      {showHomePage && 
+      {showHome && 
         <HomePage 
-          setShowHomePage={setShowHomePage}
-          setSearchOn={setSearchOn}
-          // searchedTiles={searchedTiles}
+          openSearch={openSearch}
           filterTiles={filterTiles}
           setKeyword={setKeyword}
           setCategory={setCategory}
-          updateToggle={updateToggle}
-          setUpdateToggle={setUpdateToggle}
         />
       }
 
       {/* NAVBAR */}
       <Navbar 
-        setShowHomePage={setShowHomePage}
-        setSearchOn={setSearchOn}
-        // searchedTiles={searchedTiles}
+        openSearch={openSearch}
+        openHome={openHome}
         filterTiles={filterTiles}
         setKeyword={setKeyword}
         setCategory={setCategory}
-        updateToggle={updateToggle}
-        setUpdateToggle={setUpdateToggle}
+        cart={cart}
+        openCart={openCart}
       />
 
       {/* SEARCH PAGE */}
-      {searchOn &&
+      {showSearch &&
         <section className="search-page">
           {/* Side tab to sort by keywords/tags; make glass effect */}
-          <TagFilters 
+          <Filters 
             filterTiles={filterTiles}
             keyword={keyword}
             category={category}
             updateToggle={updateToggle}
           />
           {/* Determine which tiles to be displayed before passing */}
+          {/* NEEDS TO DISPLAY "NO ITEMS FOUND" IF ARRAY IS EMPTY */}
           <ItemContainer 
             tilesArray={filteredTiles}
           />
         </section>
       }
 
+      {/* DESCRIPTION PAGE */}
+      {showDesc &&
+        <DescriptionPage 
+          descInfo={descInfo}
+          addToCart={addToCart}
+        />
+      }
+
+      {/* SHOPPING CART PAGE */}
+      {showCart &&
+        <ShoppingCartPage />
+      }
+
       {/* Tiles that can be sorted; make glass effect */}
-      {/* tiles as array variable */}
       
     </div>
   )
