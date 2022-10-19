@@ -276,6 +276,7 @@
 .search-page input::-webkit-outer-spin-button,
 .search-page input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 .search-page .item-container {
