@@ -41,6 +41,14 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
     document.querySelector(".search-bar").value = "";
   }
 
+  function cartTotal() {
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.quantity;
+    })
+    return total;
+  }
+
   return (
     <section className="navbar">
       {/* TITLE */}
@@ -55,10 +63,10 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
       {/* BUTTONS */}
       <ul>
           {/* Shop all items */}
-          <li className="shop-all"><a onClick={shopAll}>SHOP ALL</a></li>
+          <li className="shop-all" onClick={shopAll}><a>SHOP ALL</a></li>
           {/* Shop by anime */}
-          <li className="anime" onMouseLeave={() => setShowAnime(false)}>
-            <a onMouseOver={() => setShowAnime(true)}>ANIME</a>
+          <li className="anime" onMouseOver={() => setShowAnime(true)} onMouseLeave={() => setShowAnime(false)}>
+            <a>ANIME</a>
             {showAnime &&
               <div className="dropdown-list">
                 <ul>
@@ -80,8 +88,8 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
             }
           </li>
           {/* Shop by type of merchandise */}
-          <li className="merch" onMouseLeave={() => setShowMerch(false)}>
-            <a onMouseOver={() => setShowMerch(true)}>MERCHANDISE</a>
+          <li className="merch" onMouseOver={() => setShowMerch(true)} onMouseLeave={() => setShowMerch(false)}>
+            <a>MERCHANDISE</a>
             {showMerch &&
               <div className="dropdown-list">
                 <ul>
@@ -101,7 +109,7 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
       <div className="shopping-cart" onClick={openCart}>
         <img className="cart-image" src="./images/shopping-cart-white.png" />
         {cart.length > 0 &&
-          <div className="cart-quantity">{cart.length}</div>
+          <div className="cart-quantity">{cartTotal()}</div>
         }
       </div>
     </section>

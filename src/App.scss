@@ -84,6 +84,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       border-radius: 20px;
       transform: translateX(-35px) translateY(2px);
       padding: 0;
+      cursor: pointer;
   
       img {
         cursor: pointer;
@@ -177,6 +178,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       border-radius: 20px;
       right: 5px;
       position: absolute;
+      cursor: pointer;
 
       img {
         cursor: pointer;
@@ -268,7 +270,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 ////////////////
 .search-page {
   @include flexbox(row, flex-start, center);
-  @include h-w(auto, 100vw);
+  @include h-w(auto, 100%);
   padding: 90px 200px 0px 200px;
 
   ///////////////
@@ -276,7 +278,6 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   ///////////////
   .filters {
     @include h-w(auto, 250px);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 97%, rgba(100,100,100,0.3) 97%, rgba(255,255,255,1) 100%);
     padding: 20px 40px 20px 0px;
     color: black;
 
@@ -303,7 +304,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 
     div {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 70px 1fr;
       font-size: 13px;
 
       input {
@@ -331,12 +332,18 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   // ITEM CONTAINERS
   ///////////////////
   .item-container {
-    @include h-w(auto, calc(100vw - 250px));
+    @include h-w(auto, calc(100% - 250px));
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
     justify-content: space-between;
     text-align: center;
     padding: 20px;
+  }
+
+  .none-found {
+    @include h-w(auto, calc(100vw - 250px));
+    font-size: 40px;
+    padding: 40px 100px;
   }
 }
 
@@ -381,29 +388,174 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   align-items: center;
   padding: 110px 250px 0px 250px;
 
-  img {
+  .desc-imgs {
+    @include flexbox(column, center, center);
+  }
+
+  .display-img {
     @include h-w(600px, 600px);
     object-fit: contain;
   }
 
-  div {
+  .desc-previews {
+    @include flexbox(row, center, center);
+    margin-top: 20px;
+  }
+
+  .preview {
+    @include h-w(75px, 75px);
+    object-fit: contain;
+    border: solid 1px black;
+    box-shadow: 2px 2px 15px black;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .preview-clicked {
+    box-shadow: none;
+    opacity: 0.5;
+  }
+
+  .desc-info {
     @include flexbox(column, center, flex-start);
 
     h1 {
-      font-size: 50px;
+      font-size: 30px;
       text-align: center;
-      font-weight: 300;
     }
   
-    div {
-      @include flexbox(row, center, center);
+    h5 {
+      font-size: 20px;
+    }
 
-      h5 {
-        font-size: 30px;
+    ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 70px);
+      padding: 0;
+
+      li {
+        @include h-w(70px, 70px);
+        padding: 10px;
+        box-shadow: none;
+
+        .size-button {
+          @include h-w(100%, 100%);
+          cursor: pointer;
+          border-radius: 50%;
+        }
+
+        .clicked {
+          color: white;
+          background-color: $color-blue;
+          box-shadow: inset 2px 2px 5px black;
+        }
+      }
+    }
+
+    .desc-add {
+      @include h-w(50px, 120px);
+      padding: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      background-color: $color-blue;
+      color: white;
+      border-radius: 5px;
+
+      &:active {
+        box-shadow: inset 2px 2px 5px black;
+        color: rgb(0, 255, 0);
+      }
+    }
+  }
+}
+
+//////////////////////
+// SHOPPING CART PAGE
+//////////////////////
+.cart-page {
+  @include flexbox(column, center, center);
+  padding: 110px 250px 100px 250px;
+
+  .cart-header {
+    @include h-w(auto, 1000px);
+    text-align: left;
+    font-size: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid gray;
+  }
+
+  .cart-tile {
+    @include h-w(240px, 1000px);
+    display: grid;
+    grid-template-columns: 200px 1fr 50px 120px 50px 80px;
+    align-items: center;
+    justify-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid gray;
+
+    img {
+      @include h-w(200px, 200px);
+      object-fit: contain;
+    }
+
+    div {
+      width: 100%;
+      text-align: left;
+      padding: 0 30px;
+
+      h3 {
+        align-self: center;
+        justify-items: center;
+        font-size: 20px;
       }
 
-      button {
-        margin-left: 20px;
+      h5 {
+        font-size: 14px;
+      }
+
+      .qty {
+        margin-top: 20px;
+      }
+
+      input {
+        width: 3rem;
+        height: 1.5rem;
+        margin-left: 5px;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 10px;
+        color: blue;
+      }
+
+      a:active {
+        color: red;
+      }
+    }
+
+    h2 {
+      justify-self: flex-end;
+    }
+  }
+
+  .cart-total {
+    @include flexbox(column, flex-end, center);
+    @include h-w(auto, 1000px);
+
+    h1 {
+      margin: 10px 0;
+    }
+  
+    button {
+      @include h-w(40px, 100px);
+      background-color: $color-blue;
+      color: white;
+      font-size: 15px;
+
+      &:active {
+        box-shadow: inset 2px 2px 5px black;
       }
     }
   }

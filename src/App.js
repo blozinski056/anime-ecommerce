@@ -18,19 +18,22 @@ export default function App() {
   const [keyword, setKeyword] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [updateToggle, setUpdateToggle] = React.useState(true);
-  const [descInfo, setDescInfo] = React.useState({image: "", name: "", price: ""});
+  const [descInfo, setDescInfo] = React.useState({image: "", name: "", price: "", image2: "", clothing: false});
   const [cart, setCart] = React.useState([]);
   const allTiles = data.map((item) => {
+    const img2 = item.image2 ? item.image2 : "";
     return(
       <Tiles
         key={item.id}
         name={item.title}
         price={item.price}
         image={item.image}
+        image2={img2}
+        clothing={item.clothing}
         openDescPage={openDescPage}
       />
     )
-  })
+  });
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -115,15 +118,90 @@ export default function App() {
     setFilteredTiles(filtered);
   }
 
-  function addToCart(itemImage, itemName, itemPrice) {
-    setCart((prevCart) => [...prevCart, {image: itemImage, name: itemName, price: itemPrice}]);
+  // Adds 1 to item quantity if it exists, adds item if it does not
+  function updateCart(itemImage, itemName, itemPrice, itemSize, itemQuantity) {
+    let updated = false;
+    let newCart = [];
+    cart.forEach((i) => {
+      // if item matches
+      if(i.name === itemName && i.size === itemSize) {
+        updated = true;
+        // if item was not removed, push item with updated qty onto array
+        if(i.quantity + itemQuantity > 0) {
+          // increase quantity by itemQuantity
+          newCart.push(
+            {
+              image: i.image,
+              name: i.name,
+              price: i.price,
+              size: i.size,
+              quantity: i.quantity + itemQuantity
+            }
+          )
+        }
+        // if item was removed, nothing for i is pushed onto array 
+      } else {
+        // if doesn't match, return item unchanged
+        newCart.push(i);
+      }
+    })
+    const newItem = {
+      image: itemImage,
+      name: itemName,
+      price: itemPrice,
+      size: itemSize,
+      quantity: itemQuantity
+    }
+    // if item was found and updated
+    updated 
+      // then set new cart
+      ? setCart(newCart)
+      // else add new item to cart
+      : setCart(prevCart => 
+        [...prevCart, newItem])
   }
+
+  // // Adds 1 to item quantity if it exists, adds item if it does not
+  // function updateCart(itemImage, itemName, itemPrice, itemSize, itemQuantity) {
+  //   let updated = false;
+  //   let newCart = [];
+  //   cart.forEach((i) => {
+  //     // if item matches
+  //     if(i.name === itemName) {
+  //       updated = true;
+  //       // if item was not removed, push item with updated qty onto array
+  //       if(i.quantity + itemQuantity > 0) {
+  //         // increase quantity by itemQuantity
+  //         newCart.push(
+  //           {
+  //             image: i.image,
+  //             name: i.name,
+  //             price: i.price,
+  //             quantity: i.quantity + itemQuantity
+  //           }
+  //         )
+  //       }
+  //       // if item was removed, nothing for i is pushed onto array 
+  //     } else {
+  //       // if doesn't match, return item unchanged
+  //       newCart.push(i);
+  //     }
+  //   })
+  //   // if item was found and updated
+  //   updated 
+  //     // then set new cart
+  //     ? setCart(newCart)
+  //     // else add new item to cart
+  //     : setCart(prevCart => 
+  //       [...prevCart, {image: itemImage, name: itemName, price: itemPrice, quantity: itemQuantity}])
+  // }
   
   function openHome() {
     setShowHome(true);
     setShowSearch(false);
     setShowDesc(false);
     setShowCart(false);
+    document.querySelector(".search-bar").value = "";
     setUpdateToggle(!updateToggle);
   }
 
@@ -135,8 +213,8 @@ export default function App() {
     setUpdateToggle(!updateToggle);
   }
 
-  function openDescPage(descImg, descName, descPrice) {
-    setDescInfo({image: descImg, name: descName, price: descPrice});
+  function openDescPage(descImg, descName, descPrice, descImg2, descClothing) {
+    setDescInfo({image: descImg, name: descName, price: descPrice, image2: descImg2, clothing: descClothing});
     setShowHome(false);
     setShowSearch(false);
     setShowDesc(true);
@@ -195,16 +273,20 @@ export default function App() {
       }
 
       {/* DESCRIPTION PAGE */}
+      {/* NEEDS TO DISPLAY "ADDED TO CART" */}
       {showDesc &&
         <DescriptionPage 
           descInfo={descInfo}
-          addToCart={addToCart}
+          updateCart={updateCart}
         />
       }
 
       {/* SHOPPING CART PAGE */}
       {showCart &&
-        <ShoppingCartPage />
+        <ShoppingCartPage 
+          cart={cart}
+          updateCart={updateCart}
+        />
       }
 
       {/* Tiles that can be sorted; make glass effect */}
