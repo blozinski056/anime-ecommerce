@@ -160,41 +160,6 @@ export default function App() {
       : setCart(prevCart => 
         [...prevCart, newItem])
   }
-
-  // // Adds 1 to item quantity if it exists, adds item if it does not
-  // function updateCart(itemImage, itemName, itemPrice, itemSize, itemQuantity) {
-  //   let updated = false;
-  //   let newCart = [];
-  //   cart.forEach((i) => {
-  //     // if item matches
-  //     if(i.name === itemName) {
-  //       updated = true;
-  //       // if item was not removed, push item with updated qty onto array
-  //       if(i.quantity + itemQuantity > 0) {
-  //         // increase quantity by itemQuantity
-  //         newCart.push(
-  //           {
-  //             image: i.image,
-  //             name: i.name,
-  //             price: i.price,
-  //             quantity: i.quantity + itemQuantity
-  //           }
-  //         )
-  //       }
-  //       // if item was removed, nothing for i is pushed onto array 
-  //     } else {
-  //       // if doesn't match, return item unchanged
-  //       newCart.push(i);
-  //     }
-  //   })
-  //   // if item was found and updated
-  //   updated 
-  //     // then set new cart
-  //     ? setCart(newCart)
-  //     // else add new item to cart
-  //     : setCart(prevCart => 
-  //       [...prevCart, {image: itemImage, name: itemName, price: itemPrice, quantity: itemQuantity}])
-  // }
   
   function openHome() {
     setShowHome(true);
@@ -206,8 +171,8 @@ export default function App() {
   }
 
   function openSearch() {
-    setShowHome(false);
     setShowSearch(true);
+    setShowHome(false);
     setShowDesc(false);
     setShowCart(false);
     setUpdateToggle(!updateToggle);
@@ -230,6 +195,32 @@ export default function App() {
     document.querySelector(".search-bar").value = "";
     setUpdateToggle(!updateToggle);
   }
+
+  // rain effect
+  // React.useEffect(() => {
+  //   let amount = 30;
+  //   let body = document.querySelector("body");
+  //   for(let i = 0; i < amount; i++) {
+  //     let drop = document.createElement("div");
+  //     drop.className = "rain-element";
+  //     // let dropImg = document.createElement("img");
+  //     // dropImg.className = "rain-pic";
+  //     // dropImg.src = "./images/rasengan.png";
+  //     // dropImg.alt = "";
+  //     // drop.appendChild(dropImg);
+  //     let size = Math.random() * 5;
+  //     let posX = Math.floor(Math.random() * (window.innerWidth * 2));
+  //     let delay = Math.random() * -20;
+  //     let duration = Math.random() * 7 + 7;
+
+  //     drop.style.width = 5 + size + "px";
+  //     drop.style.left = posX + "px";
+  //     drop.style.animationDelay = delay + "s";
+  //     drop.style.animationDuration = duration + "s";
+  //     body.appendChild(drop);
+  //   }
+  // }, [])
+    
 
   return (
     <div>
@@ -265,7 +256,6 @@ export default function App() {
             updateToggle={updateToggle}
           />
           {/* Determine which tiles to be displayed before passing */}
-          {/* NEEDS TO DISPLAY "NO ITEMS FOUND" IF ARRAY IS EMPTY */}
           <ItemContainer 
             tilesArray={filteredTiles}
           />
@@ -288,9 +278,6 @@ export default function App() {
           updateCart={updateCart}
         />
       }
-
-      {/* Tiles that can be sorted; make glass effect */}
-      
     </div>
   )
 }

@@ -35,7 +35,29 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
 /////////////
 // ANIMATIONS
 /////////////
+@keyframes rain {
+  0% {
+    transform: translate(-70vw, -200px) rotate(-35deg);
+  }
+  100% {
+    transform: translate(-20vw, calc(100vh + 200px)) rotate(-35deg);
+  }
+}
 
+@keyframes swipeUp {
+  0% {
+    transform: scaleY(100%);
+    opacity: 1;
+  }
+  20% {
+    transform: scaleY(120%);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0%);
+    opacity: 0.3;
+  }
+}
 
 * {
   margin: 0;
@@ -43,6 +65,43 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   user-select: none;
   font-family: $font-kdam;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+///////////////
+// RAIN EFFECT
+///////////////
+// .rain-element {
+//   position: absolute;
+//   top: 0;
+//   height: 200px;
+//   border-bottom-left-radius: 5px;
+//   border-bottom-right-radius: 5px;
+//   animation: rain 7s linear infinite;
+//   // @include flexbox(column, center, flex-end);
+//   // background: linear-gradient(transparent 70%, aqua);
+//   z-index: -5;
+// }
+
+// // .rain-pic {
+// //   @include h-w(30px,30px);
+// //   object-fit: contain;
+// //   transform: translateY(50%);
+// // }
+
+// .rain-element:nth-child(3n) {
+//   background: linear-gradient(transparent, aqua);
+// }
+
+// .rain-element:nth-child(3n + 1) {
+//   background: linear-gradient(transparent, red);
+// }
+
+// .rain-element:nth-child(3n + 2) {
+//   background: linear-gradient(transparent, blue);
+// }
 
 ////////////
 // HOMEPAGE
@@ -272,6 +331,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   @include flexbox(row, flex-start, center);
   @include h-w(auto, 100%);
   padding: 90px 200px 0px 200px;
+  backdrop-filter: blur(2px);
 
   ///////////////
   // FILTERS
@@ -418,7 +478,8 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
   }
 
   .desc-info {
-    @include flexbox(column, center, flex-start);
+    @include flexbox(column, flex-start, flex-start);
+    @include h-w(100%, 100%);
 
     h1 {
       font-size: 30px;
@@ -461,7 +522,6 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       cursor: pointer;
       background-color: $color-blue;
       color: white;
-      border-radius: 5px;
 
       &:active {
         box-shadow: inset 2px 2px 5px black;
@@ -554,6 +614,7 @@ $font-kdam: 'Kdam Thmor Pro', sans-serif;
       background-color: $color-blue;
       color: white;
       font-size: 15px;
+      cursor: pointer;
 
       &:active {
         box-shadow: inset 2px 2px 5px black;
