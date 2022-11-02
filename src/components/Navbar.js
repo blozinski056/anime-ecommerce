@@ -41,6 +41,7 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
     document.querySelector(".search-bar").value = "";
   }
 
+  // Counts total to display next to cart icon
   function cartTotal() {
     let total = 0;
     cart.forEach((item) => {
@@ -55,18 +56,22 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
       <h1 onClick={home}>WeebSite</h1>
       {/* SEARCH BAR */}
       <form onSubmit={searchKeyword}>
-        <input className="search-bar" placeholder="Search" />
+        <input 
+          className="search-bar" 
+          placeholder="Search" 
+          type="text"
+        />
         <button className="search-icon" type="submit">
-          <img src="./images/search-white-2.png" />
+          <img src="./images/search-white-2.png" alt="" />
         </button>
       </form>
       {/* BUTTONS */}
       <ul>
           {/* Shop all items */}
-          <li className="shop-all" onClick={shopAll}><a>SHOP ALL</a></li>
+          <li className="shop-all" onClick={shopAll}><button>SHOP ALL</button></li>
           {/* Shop by anime */}
           <li className="anime" onMouseOver={() => setShowAnime(true)} onMouseLeave={() => setShowAnime(false)}>
-            <a>ANIME</a>
+            <button>ANIME</button>
             {showAnime &&
               <div className="dropdown-list">
                 <ul>
@@ -89,7 +94,7 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
           </li>
           {/* Shop by type of merchandise */}
           <li className="merch" onMouseOver={() => setShowMerch(true)} onMouseLeave={() => setShowMerch(false)}>
-            <a>MERCHANDISE</a>
+            <button>MERCHANDISE</button>
             {showMerch &&
               <div className="dropdown-list">
                 <ul>
@@ -107,7 +112,7 @@ export default function Navbar({openSearch, openHome, filterTiles, setKeyword, s
         </ul>
       {/* SHOPPING CART */}
       <div className="shopping-cart" onClick={openCart}>
-        <img className="cart-image" src="./images/shopping-cart-white.png" />
+        <img className="cart-image" src="./images/shopping-cart-white.png" alt="" />
         {cart.length > 0 &&
           <div className="cart-quantity">{cartTotal()}</div>
         }

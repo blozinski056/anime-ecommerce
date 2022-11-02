@@ -1,16 +1,3 @@
-// Paragraph: stiff, blocky, tight
-// font-family: 'Kdam Thmor Pro', sans-serif;
-// Paragraph: bottom is flat
-// font-family: 'Miriam Libre', sans-serif;
-// Titles: angled
-// font-family: 'Racing Sans One', cursive;
-// Paragraph: straight edges
-// font-family: 'Sarala', sans-serif;
-// Title: angled, cursive
-// font-family: 'Sarina', cursive;
-// Paragraph: digital
-// font-family: 'Sarpanch', sans-serif;
-
 /////////////
 // VARIABLES
 /////////////
@@ -70,38 +57,43 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  border: solid 2px $color-blue;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-blue;
+  border: solid 2px white;
+}
+
 ///////////////
 // RAIN EFFECT
 ///////////////
-// .rain-element {
-//   position: absolute;
-//   top: 0;
-//   height: 200px;
-//   border-bottom-left-radius: 5px;
-//   border-bottom-right-radius: 5px;
-//   animation: rain 7s linear infinite;
-//   // @include flexbox(column, center, flex-end);
-//   // background: linear-gradient(transparent 70%, aqua);
-//   z-index: -5;
-// }
+.rain-element {
+  position: fixed;
+  top: 0;
+  height: 200px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  animation: rain 7s linear infinite;
+  z-index: -5;
+}
 
-// // .rain-pic {
-// //   @include h-w(30px,30px);
-// //   object-fit: contain;
-// //   transform: translateY(50%);
-// // }
+.rain-element:nth-child(3n) {
+  background: linear-gradient(transparent, aqua);
+}
 
-// .rain-element:nth-child(3n) {
-//   background: linear-gradient(transparent, aqua);
-// }
+.rain-element:nth-child(3n + 1) {
+  background: linear-gradient(transparent, red);
+}
 
-// .rain-element:nth-child(3n + 1) {
-//   background: linear-gradient(transparent, red);
-// }
-
-// .rain-element:nth-child(3n + 2) {
-//   background: linear-gradient(transparent, blue);
-// }
+.rain-element:nth-child(3n + 2) {
+  background: linear-gradient(transparent, $color-blue);
+}
 
 ////////////
 // HOMEPAGE
@@ -155,14 +147,24 @@ body {
     ul {
       @include flexbox(row, center, center);
       list-style: none;
-      padding: 0;
+      padding: 10px 0;
   
       li {
-        padding: 0 20px 0 20px;
+        padding: 10px 20px;
         font-size: 20px;
         letter-spacing: 2px;
         cursor: pointer;
+        border-top: solid 2px transparent;
+        border-bottom: solid 2px transparent;
 
+        button {
+          color: white;
+          background-color: transparent;
+          padding: 0;
+          border: none;
+          font-size: 20px;
+          cursor: pointer;
+        }
 
         .dropdown-list {
           ul {
@@ -171,7 +173,7 @@ body {
             width: 250px;
             list-style: none;
             position: absolute;
-            transform: translateY(50%);
+            transform: translateY(52%);
             padding: 10px;
             cursor: default;
     
@@ -187,7 +189,8 @@ body {
       }
 
       li:hover {
-        background: linear-gradient(90deg, rgba(0,110,255,1) 0%, rgb(0, 85, 190) 30%, rgb(0, 85, 190) 70%, rgba(0,110,255,1) 100%);
+        border-top: solid 2px white;
+        border-bottom: solid 2px white;
       }
     }
   }
@@ -253,25 +256,37 @@ body {
     padding: 0;
     column-gap: 15px;
 
-    .shop-all a {
+    .shop-all {
       min-width: 100px;
     }
 
-    .anime a{
+    .anime {
       min-width: 65px;
     }
 
-    .merch a {
+    .merch {
       min-width: 145px;
+    }
+
+    .shop-all button,
+    .anime button,
+    .merch button {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
     }
 
     li {
       @include flexbox(column, center, center);
-      font-size: 17px;
+      font-size: 15px;
       letter-spacing: 2px;
       cursor: pointer;
       padding: 10px;
-
+      border-top: solid 2px transparent;
+      border-bottom: solid 2px transparent;
 
       .dropdown-list {
         ul {
@@ -280,11 +295,11 @@ body {
           width: 250px;
           list-style: none;
           position: absolute;
-          transform: translateX(-50%) translateY(10px);
+          transform: translateX(-50%) translateY(12px);
           padding: 10px;
           cursor: default;
           background-color: $color-blue;
-          opacity: 0.9;
+          opacity: 1;
   
           li {
             display: block;
@@ -298,7 +313,8 @@ body {
     }
 
     li:hover {
-      background: linear-gradient(90deg, rgba(0,110,255,1) 0%, rgb(0, 85, 190) 30%, rgb(0, 85, 190) 70%, rgba(0,110,255,1) 100%);
+      border-top: solid 2px white;
+      border-bottom: solid 2px white;
     }
   }
   
@@ -331,7 +347,6 @@ body {
   @include flexbox(row, flex-start, center);
   @include h-w(auto, 100%);
   padding: 90px 200px 0px 200px;
-  backdrop-filter: blur(2px);
 
   ///////////////
   // FILTERS
@@ -370,6 +385,13 @@ body {
       input {
         @include h-w(auto, 4em);
       }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
     }
 
     .min-price, .max-price {
@@ -380,13 +402,6 @@ body {
       cursor: pointer;
       margin-top: 30px;
     }
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
   }
 
   ///////////////////
@@ -444,7 +459,7 @@ body {
 .desc-page {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 30px;
+  gap: 50px;
   justify-items: center;
   align-items: center;
   padding: 110px 250px 0px 250px;
@@ -480,54 +495,74 @@ body {
   .desc-info {
     @include flexbox(column, flex-start, flex-start);
     @include h-w(100%, 100%);
+    margin: 50px 20px 0 20px;
 
     h1 {
-      font-size: 30px;
-      text-align: center;
-    }
-  
-    h5 {
-      font-size: 20px;
+      width: 100%;
+      font-size: 40px;
+      text-align: left;
+      padding-bottom: 25px;
+      margin-bottom: 30px;
+      border-bottom: solid 1px black;
     }
 
-    ul {
-      list-style: none;
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .desc-price-container {
       display: grid;
-      grid-template-columns: repeat(5, 70px);
-      padding: 0;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
 
-      li {
-        @include h-w(70px, 70px);
-        padding: 10px;
-        box-shadow: none;
+        h5 {
+          font-size: 30px;
+          align-self: center;
+        }
 
-        .size-button {
-          @include h-w(100%, 100%);
+        ul {
+          list-style: none;
+          display: grid;
+          grid-template-columns: repeat(5, 70px);
+          padding: 0;
+    
+          li {
+            @include h-w(70px, 70px);
+            padding: 10px;
+            box-shadow: none;
+    
+            .size-button {
+              @include h-w(100%, 100%);
+              cursor: pointer;
+              border-radius: 50%;
+            }
+    
+            .clicked {
+              color: white;
+              background-color: $color-blue;
+              box-shadow: inset 2px 2px 5px black;
+            }
+          }
+        }
+
+        .desc-add {
+          @include h-w(50px, 120px);
+          padding: 10px;
+          font-size: 15px;
           cursor: pointer;
-          border-radius: 50%;
-        }
-
-        .clicked {
-          color: white;
           background-color: $color-blue;
-          box-shadow: inset 2px 2px 5px black;
+          color: white;
+          align-self: center;
+          justify-self: end;
+          grid-column-start: 3;
+    
+          &:active {
+            box-shadow: inset 2px 2px 5px black;
+            color: rgb(0, 255, 0);
+          }
         }
       }
-    }
-
-    .desc-add {
-      @include h-w(50px, 120px);
-      padding: 10px;
-      font-size: 15px;
-      cursor: pointer;
-      background-color: $color-blue;
-      color: white;
-
-      &:active {
-        box-shadow: inset 2px 2px 5px black;
-        color: rgb(0, 255, 0);
-      }
-    }
   }
 }
 
@@ -585,13 +620,16 @@ body {
         margin-left: 5px;
       }
 
-      a {
-        text-decoration: none;
+      button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
         font-size: 10px;
         color: blue;
       }
 
-      a:active {
+      button:active {
         color: red;
       }
     }

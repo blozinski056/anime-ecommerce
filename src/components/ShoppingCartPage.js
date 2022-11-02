@@ -4,6 +4,7 @@ export default function ShoppingCartPage({cart, updateCart}) {
   const [subtotal, setSubtotal] = React.useState(0);
   const [displayCart, setDisplayCart] = React.useState([]);
   
+  // Creates and updates tiles for each item in the shopping 'cart'
   React.useEffect(() => {
     let newSubtotal = 0;
     const newDisplayCart = cart.map((item) => {
@@ -14,7 +15,9 @@ export default function ShoppingCartPage({cart, updateCart}) {
           <img src={item.image} alt="" />
           <div>
             <h3>{item.name}</h3>
-            <h5>Size: {item.size}</h5>
+            {item.clothing &&
+              <h5>Size: {item.size}</h5>
+            }
             <h5 className="qty">Quantity:
               <input 
                 className="qty-count"
@@ -25,7 +28,7 @@ export default function ShoppingCartPage({cart, updateCart}) {
                 min={1}
               />
             </h5>
-            <a href="#" onClick={() => updateCart("", item.name, "", item.size, -item.quantity)}>Remove</a>
+            <button onClick={() => updateCart("", item.name, "", "", item.size, -item.quantity)}>Remove</button>
           </div>
           <h3>x</h3>
           <h3>${item.price} each</h3>
@@ -56,7 +59,7 @@ export default function ShoppingCartPage({cart, updateCart}) {
   function changeQty(itemKey, itemName, itemSize, itemQty) {
     const currentQty = document.querySelector(`[name="${itemKey}"]`).value;
     const newQty = currentQty - itemQty;
-    updateCart("", itemName, "", itemSize, newQty);
+    updateCart("", itemName, "", "", itemSize, newQty);
   }
 
   return (

@@ -20,6 +20,7 @@ export default function App() {
   const [updateToggle, setUpdateToggle] = React.useState(true);
   const [descInfo, setDescInfo] = React.useState({image: "", name: "", price: "", image2: "", clothing: false});
   const [cart, setCart] = React.useState([]);
+  // Turning data.js file into Tiles
   const allTiles = data.map((item) => {
     const img2 = item.image2 ? item.image2 : "";
     return(
@@ -39,6 +40,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [updateToggle])
 
+  // Used in filterTiles()
   // Returns new array based on keyword
   function filtering(word, listOfTiles) {
     let f = [];
@@ -85,7 +87,9 @@ export default function App() {
     return f;
   }
 
-  // Used when filter tab is activated
+  // Used on 'HomePage', 'Navbar', and search page 'Filters'
+  // Takes into account the searched keyword before filters for anime, merch, and price range
+  // Sets 'filteredTiles' to display on search page
   function filterTiles(searchWord, animeWords, merchWords, priceRange) {
     let filtered = filtering(searchWord, allTiles);
     if(animeWords.length > 0) {
@@ -118,8 +122,10 @@ export default function App() {
     setFilteredTiles(filtered);
   }
 
-  // Adds 1 to item quantity if it exists, adds item if it does not
-  function updateCart(itemImage, itemName, itemPrice, itemSize, itemQuantity) {
+  // Used on 'DescriptionPage' and 'ShoppingCartPage'
+  // Increases item quantity if it exists; otherwise adds item to list
+  // Sets 'cart' with new list
+  function updateCart(itemImage, itemName, itemPrice, itemClothing, itemSize, itemQuantity) {
     let updated = false;
     let newCart = [];
     cart.forEach((i) => {
@@ -135,7 +141,8 @@ export default function App() {
               name: i.name,
               price: i.price,
               size: i.size,
-              quantity: i.quantity + itemQuantity
+              quantity: i.quantity + itemQuantity,
+              clothing: i.clothing
             }
           )
         }
@@ -150,7 +157,8 @@ export default function App() {
       name: itemName,
       price: itemPrice,
       size: itemSize,
-      quantity: itemQuantity
+      quantity: itemQuantity,
+      clothing: itemClothing
     }
     // if item was found and updated
     updated 
@@ -178,6 +186,8 @@ export default function App() {
     setUpdateToggle(!updateToggle);
   }
 
+  // Used in 'Tiles'
+  // Sets 'descInfo' to be displayed on 'DescriptionPage'
   function openDescPage(descImg, descName, descPrice, descImg2, descClothing) {
     setDescInfo({image: descImg, name: descName, price: descPrice, image2: descImg2, clothing: descClothing});
     setShowHome(false);
@@ -197,29 +207,24 @@ export default function App() {
   }
 
   // rain effect
-  // React.useEffect(() => {
-  //   let amount = 30;
-  //   let body = document.querySelector("body");
-  //   for(let i = 0; i < amount; i++) {
-  //     let drop = document.createElement("div");
-  //     drop.className = "rain-element";
-  //     // let dropImg = document.createElement("img");
-  //     // dropImg.className = "rain-pic";
-  //     // dropImg.src = "./images/rasengan.png";
-  //     // dropImg.alt = "";
-  //     // drop.appendChild(dropImg);
-  //     let size = Math.random() * 5;
-  //     let posX = Math.floor(Math.random() * (window.innerWidth * 2));
-  //     let delay = Math.random() * -20;
-  //     let duration = Math.random() * 7 + 7;
+  React.useEffect(() => {
+    let amount = 20;
+    let body = document.querySelector("body");
+    for(let i = 0; i < amount; i++) {
+      let drop = document.createElement("div");
+      drop.className = "rain-element";
+      let size = Math.random() * 5;
+      let posX = Math.floor(Math.random() * (window.innerWidth * 2));
+      let delay = Math.random() * -20;
+      let duration = Math.random() * 7 + 7;
 
-  //     drop.style.width = 5 + size + "px";
-  //     drop.style.left = posX + "px";
-  //     drop.style.animationDelay = delay + "s";
-  //     drop.style.animationDuration = duration + "s";
-  //     body.appendChild(drop);
-  //   }
-  // }, [])
+      drop.style.width = 5 + size + "px";
+      drop.style.left = posX + "px";
+      drop.style.animationDelay = delay + "s";
+      drop.style.animationDuration = duration + "s";
+      body.appendChild(drop);
+    }
+  }, [])
     
 
   return (

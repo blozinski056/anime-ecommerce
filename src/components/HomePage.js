@@ -23,7 +23,7 @@ export default function HomePage({openSearch, filterTiles, setKeyword, setCatego
     openSearch();
   }
 
-  // Used when Shop All is clicked
+  // Used when 'Shop All' is clicked
   function shopAll() {
     filterTiles("", [], [], []);
     setKeyword("");
@@ -41,16 +41,16 @@ export default function HomePage({openSearch, filterTiles, setKeyword, setCatego
         <form onSubmit={searchKeyword}>
           <input className="search-bar" placeholder="Search" />
           <button className="search-icon" type="submit">
-            <img src="./images/search-white-2.png" />
+            <img src="./images/search-white-2.png" alt="" />
           </button>
         </form>
         {/* BUTTONS */}
         <ul>
           {/* Shop all items */}
-          <li><a onClick={shopAll}>SHOP ALL</a></li>
+          <li onClick={shopAll}><button>SHOP ALL</button></li>
           {/* Shop by anime */}
-          <li className="anime-dropdown" onMouseLeave={() => setShowAnime(false)}>
-            <a onMouseOver={() => setShowAnime(true)}>ANIME</a>
+          <li className="anime-dropdown" onMouseOver={() => setShowAnime(true)} onMouseLeave={() => setShowAnime(false)}>
+            <button>ANIME</button>
             {showAnime &&
               <div className="dropdown-list">
                 <ul>
@@ -72,8 +72,8 @@ export default function HomePage({openSearch, filterTiles, setKeyword, setCatego
             }
           </li>
           {/* Shop by type of merchandise */}
-          <li className="merch-dropdown" onMouseLeave={() => setShowMerch(false)}>
-            <a onMouseOver={() => setShowMerch(true)}>MERCHANDISE</a>
+          <li className="merch-dropdown" onMouseOver={() => setShowMerch(true)} onMouseLeave={() => setShowMerch(false)}>
+            <button>MERCHANDISE</button>
             {showMerch &&
               <div className="dropdown-list">
                 <ul>

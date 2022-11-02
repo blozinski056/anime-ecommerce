@@ -68,13 +68,11 @@ export default function Filters({filterTiles, keyword, category, updateToggle}) 
         merchWords.push(merch);
       }
     })
-
-    console.log(animeWords);
-    console.log(merchWords);
-    console.log(priceRange[0] + ", " + priceRange[1]);
     filterTiles(keyword, animeWords, merchWords, priceRange);
   }
-
+  
+  // If minimum value is input, sets min for maxPrice
+  // If maxPrice already exists before min value is input, maxPrice will be notified is below min value
   function minPriceVal(event) {
     const min = event.target.value;
     const mp = document.querySelector(".max-price");
