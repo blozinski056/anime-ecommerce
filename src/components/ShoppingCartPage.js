@@ -41,21 +41,6 @@ export default function ShoppingCartPage({cart, updateCart}) {
     setDisplayCart(newDisplayCart);
   }, [cart])
 
-  // function handleChange(itemKey, itemName, itemQty) {
-  //   let currentQty = document.querySelector(`[name="${itemKey}"]`).value;
-  //   if(currentQty > 0 && currentQty <= 10){ // valid number
-  //     console.log("valid num: " + currentQty);
-  //     changeQty(itemKey, itemName, itemQty);
-  //   } else if(currentQty > 10) { // greater than 10
-  //     console.log("is > 10: " + currentQty);
-  //     document.querySelector(`[name="${itemKey}"]`).value = 10;
-  //     changeQty(itemKey, itemName, itemQty);
-  //   } else { // empty string
-  //     console.log("anything else");
-  //     document.querySelector(`[name="${itemKey}"]`).value = "";
-  //   }
-  // }
-
   function changeQty(itemKey, itemName, itemSize, itemQty) {
     const currentQty = document.querySelector(`[name="${itemKey}"]`).value;
     const newQty = currentQty - itemQty;
