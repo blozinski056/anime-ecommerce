@@ -86,7 +86,8 @@ app.post("/api/users/:username/cart", async (req, res) => {
     const { username } = req.params;
     const { itemid, size, quantity } = req.body;
     const newItem = await pool.query(
-      "INSERT INTO cart(user, itemid, size, quantity) VALUES($1, $2, $3, $4)"
+      "INSERT INTO cart(username, itemid, size, quantity) VALUES($1, $2, $3, $4) RETURNING *",
+      [username, itemid, size, quantity]
     );
     res.json(newItem.rows[0]);
   } catch (err) {
@@ -98,9 +99,10 @@ app.post("/api/users/:username/cart", async (req, res) => {
 app.get("/api/users/:username/cart", async (req, res) => {
   try {
     const { username } = req.params;
-    const usersCart = await pool.query("SELECT * FROM cart WHERE user = $1", [
-      username,
-    ]);
+    const usersCart = await pool.query(
+      "SELECT * FROM cart WHERE username = $1",
+      [username]
+    );
     res.json(usersCart.rows);
   } catch (err) {
     console.error(err.message);
@@ -111,9 +113,10 @@ app.get("/api/users/:username/cart", async (req, res) => {
 app.get("/api/users/:username/cart/:itemid", async (req, res) => {
   try {
     const { username, itemid } = req.params;
+    const { size } = req.body;
     const item = await pool.query(
-      "SELECT * FROM cart WHERE user = $1 AND itemid = $2",
-      [username, itemid]
+      "SELECT * FROM cart WHERE username = $1 AND itemid = $2 AND size = $3",
+      [username, itemid, size]
     );
     res.json(item.rows[0]);
   } catch (err) {
@@ -127,7 +130,7 @@ app.put("/api/users/:username/cart/:itemid", async (req, res) => {
     const { username, itemid } = req.params;
     const { size, quantity } = req.body;
     const item = await pool.query(
-      "UPDATE cart SET quantity = $1 WHERE user = $2 AND itemid = $3 AND size = $4",
+      "UPDATE cart SET quantity = $1 WHERE username = $2 AND itemid = $3 AND size = $4 RETURNING *",
       [quantity, username, itemid, size]
     );
     res.json(item.rows[0]);
@@ -140,10 +143,10 @@ app.put("/api/users/:username/cart/:itemid", async (req, res) => {
 app.delete("/api/users/:username/cart/:itemid", async (req, res) => {
   try {
     const { username, itemid } = req.params;
-    const { size, quantity } = req.body;
+    const { size } = req.body;
     await pool.query(
-      "DELETE FROM cart WHERE user = $1 AND itemid = $2 AND size = $3 AND quantity = $4",
-      [username, itemid, size, quantity]
+      "DELETE FROM cart WHERE username = $1 AND itemid = $2 AND size = $3",
+      [username, itemid, size]
     );
     res.json(`Removed all of item ${itemid}`);
   } catch (err) {
