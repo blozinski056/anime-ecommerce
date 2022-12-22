@@ -61,11 +61,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  border: solid 2px rgb(0, 110, 255);
+  border: solid 2px rgb(255, 115, 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   border: solid 2px white;
 }
 
@@ -89,7 +89,7 @@ body {
 }
 
 .rain-element:nth-child(3n+2) {
-  background: linear-gradient(transparent, rgb(0, 110, 255));
+  background: linear-gradient(transparent, rgb(255, 115, 0));
 }
 
 .homepage {
@@ -100,7 +100,7 @@ body {
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   color: white;
   z-index: 10;
 }
@@ -131,7 +131,7 @@ body {
 .homepage div .search-icon {
   height: 30px;
   width: 30px;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   border: none;
   border-radius: 20px;
   transform: translateX(-35px) translateY(2px);
@@ -203,7 +203,7 @@ body {
   align-items: center;
   justify-content: space-between;
   color: white;
-  background: linear-gradient(180deg, rgb(0, 110, 255) 95%, rgba(100, 100, 100, 0.5) 95%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, rgb(255, 115, 0) 95%, rgba(100, 100, 100, 0.5) 95%, rgba(255, 255, 255, 0) 100%);
   padding: 0 200px 0 200px;
   z-index: 5;
 }
@@ -232,7 +232,7 @@ body {
 .navbar form .search-icon {
   height: 30px;
   width: 30px;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   border: none;
   border-radius: 20px;
   right: 5px;
@@ -298,7 +298,7 @@ body {
   transform: translateX(-50%) translateY(12px);
   padding: 10px;
   cursor: default;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   opacity: 1;
 }
 .navbar ul li .dropdown-list ul li {
@@ -362,7 +362,8 @@ body {
   cursor: default;
   font-size: 13px;
 }
-.search-page .filters ul li input, .search-page .filters ul li label {
+.search-page .filters ul li input,
+.search-page .filters ul li label {
   cursor: pointer;
 }
 .search-page .filters div {
@@ -380,7 +381,8 @@ body {
   appearance: none;
   margin: 0;
 }
-.search-page .filters .min-price, .search-page .filters .max-price {
+.search-page .filters .min-price,
+.search-page .filters .max-price {
   cursor: text;
 }
 .search-page .filters button {
@@ -526,7 +528,7 @@ body {
 }
 .desc-page .desc-info .desc-price-container ul li .clicked {
   color: white;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   box-shadow: inset 2px 2px 5px black;
 }
 .desc-page .desc-info .desc-price-container .desc-add {
@@ -535,7 +537,7 @@ body {
   padding: 10px;
   font-size: 15px;
   cursor: pointer;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   color: white;
   align-self: center;
   justify-self: end;
@@ -626,7 +628,7 @@ body {
 .cart-page .cart-total button {
   height: 40px;
   width: 100px;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(255, 115, 0);
   color: white;
   font-size: 15px;
   cursor: pointer;

@@ -2,7 +2,8 @@
 // VARIABLES
 /////////////
 $color-blue: rgb(0, 110, 255);
-$font-kdam: 'Kdam Thmor Pro', sans-serif;
+$color-orange: rgb(255, 115, 0);
+$font-kdam: "Kdam Thmor Pro", sans-serif;
 
 //////////
 // MIXINS
@@ -62,11 +63,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  border: solid 2px $color-blue;
+  border: solid 2px $color-orange;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $color-blue;
+  background-color: $color-orange;
   border: solid 2px white;
 }
 
@@ -92,7 +93,7 @@ body {
 }
 
 .rain-element:nth-child(3n + 2) {
-  background: linear-gradient(transparent, $color-blue);
+  background: linear-gradient(transparent, $color-orange);
 }
 
 ////////////
@@ -102,7 +103,7 @@ body {
   @include flexbox(center, center);
   @include h-w(100vh, 100vw);
   position: absolute;
-  background-color: $color-blue;
+  background-color: $color-orange;
   color: white;
   z-index: 10;
 
@@ -112,11 +113,11 @@ body {
 
     h1 {
       font-size: 100px;
-      font-family: 'Racing Sans One', cursive;
+      font-family: "Racing Sans One", cursive;
       margin-bottom: 20px;
       cursor: default;
     }
-  
+
     input {
       @include h-w(40px, 700px);
       border: none;
@@ -127,28 +128,28 @@ body {
       color: rgb(77, 77, 77);
       font-weight: 900;
     }
-  
+
     .search-icon {
       @include h-w(30px, 30px);
-      background-color: $color-blue;
+      background-color: $color-orange;
       border: none;
       border-radius: 20px;
       transform: translateX(-35px) translateY(2px);
       padding: 0;
       cursor: pointer;
-  
+
       img {
         cursor: pointer;
         @include h-w(20px, 20px);
         transform: translateY(1.5px);
       }
     }
-  
+
     ul {
       @include flexbox(row, center, center);
       list-style: none;
       padding: 10px 0;
-  
+
       li {
         padding: 10px 20px;
         font-size: 20px;
@@ -176,7 +177,7 @@ body {
             transform: translateY(52%);
             padding: 10px;
             cursor: default;
-    
+
             li {
               display: block;
               font-size: 15px;
@@ -209,13 +210,18 @@ body {
   justify-content: space-between;
 
   color: white;
-  background: linear-gradient(180deg, $color-blue 95%, rgba(100,100,100,0.5) 95%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    180deg,
+    $color-orange 95%,
+    rgba(100, 100, 100, 0.5) 95%,
+    rgba(255, 255, 255, 0) 100%
+  );
   padding: 0 200px 0 200px;
   z-index: 5;
 
   h1 {
     font-size: 40px;
-    font-family: 'Racing Sans One', cursive;
+    font-family: "Racing Sans One", cursive;
     cursor: pointer;
   }
 
@@ -235,7 +241,7 @@ body {
 
     .search-icon {
       @include h-w(30px, 30px);
-      background-color: $color-blue;
+      background-color: $color-orange;
       border: none;
       border-radius: 20px;
       right: 5px;
@@ -298,9 +304,9 @@ body {
           transform: translateX(-50%) translateY(12px);
           padding: 10px;
           cursor: default;
-          background-color: $color-blue;
+          background-color: $color-orange;
           opacity: 1;
-  
+
           li {
             display: block;
             font-size: 15px;
@@ -317,7 +323,7 @@ body {
       border-bottom: solid 2px white;
     }
   }
-  
+
   .shopping-cart {
     position: relative;
     .cart-image {
@@ -337,7 +343,6 @@ body {
       border-radius: 0.5rem;
     }
   }
-    
 }
 
 ////////////////
@@ -370,8 +375,9 @@ body {
       li {
         cursor: default;
         font-size: 13px;
-  
-        input, label {
+
+        input,
+        label {
           cursor: pointer;
         }
       }
@@ -394,7 +400,8 @@ body {
       }
     }
 
-    .min-price, .max-price {
+    .min-price,
+    .max-price {
       cursor: text;
     }
 
@@ -430,7 +437,7 @@ body {
   @include flexbox(column, center, center);
   @include h-w(300px, 250px);
   padding: 10px;
-  
+
   img {
     @include h-w(220px, 220px);
     object-fit: contain;
@@ -516,53 +523,53 @@ body {
       grid-template-columns: repeat(3, 1fr);
       width: 100%;
 
-        h5 {
-          font-size: 30px;
-          align-self: center;
-        }
+      h5 {
+        font-size: 30px;
+        align-self: center;
+      }
 
-        ul {
-          list-style: none;
-          display: grid;
-          grid-template-columns: repeat(5, 70px);
-          padding: 0;
-    
-          li {
-            @include h-w(70px, 70px);
-            padding: 10px;
-            box-shadow: none;
-    
-            .size-button {
-              @include h-w(100%, 100%);
-              cursor: pointer;
-              border-radius: 50%;
-            }
-    
-            .clicked {
-              color: white;
-              background-color: $color-blue;
-              box-shadow: inset 2px 2px 5px black;
-            }
-          }
-        }
+      ul {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(5, 70px);
+        padding: 0;
 
-        .desc-add {
-          @include h-w(50px, 120px);
+        li {
+          @include h-w(70px, 70px);
           padding: 10px;
-          font-size: 15px;
-          cursor: pointer;
-          background-color: $color-blue;
-          color: white;
-          align-self: center;
-          justify-self: end;
-          grid-column-start: 3;
-    
-          &:active {
+          box-shadow: none;
+
+          .size-button {
+            @include h-w(100%, 100%);
+            cursor: pointer;
+            border-radius: 50%;
+          }
+
+          .clicked {
+            color: white;
+            background-color: $color-orange;
             box-shadow: inset 2px 2px 5px black;
-            color: rgb(0, 255, 0);
           }
         }
       }
+
+      .desc-add {
+        @include h-w(50px, 120px);
+        padding: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        background-color: $color-orange;
+        color: white;
+        align-self: center;
+        justify-self: end;
+        grid-column-start: 3;
+
+        &:active {
+          box-shadow: inset 2px 2px 5px black;
+          color: rgb(0, 255, 0);
+        }
+      }
+    }
   }
 }
 
@@ -646,10 +653,10 @@ body {
     h1 {
       margin: 10px 0;
     }
-  
+
     button {
       @include h-w(40px, 100px);
-      background-color: $color-blue;
+      background-color: $color-orange;
       color: white;
       font-size: 15px;
       cursor: pointer;
