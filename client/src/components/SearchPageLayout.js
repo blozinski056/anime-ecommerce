@@ -18,7 +18,12 @@ export default function SearchPageLayout({ setItemDetails }) {
 
   // Determine which parameter is the search word and which is the category
   React.useEffect(() => {
-    if (param1 === param1.toUpperCase()) {
+    console.log(param1, param2);
+
+    if (param1 === undefined) {
+      setSearchWord("");
+      setCategory("");
+    } else if (param1 === param1.toUpperCase()) {
       setCategory(param1);
       if (param2) {
         setSearchWord(param2);

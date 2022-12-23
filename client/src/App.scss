@@ -8,16 +8,16 @@ $font-kdam: "Kdam Thmor Pro", sans-serif;
 //////////
 // MIXINS
 //////////
-@mixin flexbox($dir: row, $align: center, $justify: center) {
+@mixin flexbox($fd: row, $ai: center, $jc: center) {
   display: flex;
-  flex-direction: $dir;
-  align-items: $align;
-  justify-content: $justify;
+  flex-direction: $fd;
+  align-items: $ai;
+  justify-content: $jc;
 }
 
-@mixin h-w($height: 50px, $width: 50px) {
-  height: $height;
+@mixin w-h($width: 50px, $height: 50px) {
   width: $width;
+  height: $height;
 }
 
 /////////////
@@ -47,153 +47,170 @@ $font-kdam: "Kdam Thmor Pro", sans-serif;
   }
 }
 
+/////////
+// STYLES
+/////////
+
 * {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
   user-select: none;
   font-family: $font-kdam;
 }
 
 body {
-  overflow-x: hidden;
+  @include flexbox;
 }
 
-::-webkit-scrollbar {
-  width: 20px;
+// In both HomePage and Navbar
+.search-form {
+  position: relative;
+
+  .search-bar {
+    @include w-h(50vw, 40px);
+    max-width: 700px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+    color: rgb(77, 77, 77);
+    font-weight: 900;
+  }
+
+  .search-icon {
+    @include w-h(30px, 30px);
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: $color-orange;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    img {
+      cursor: pointer;
+      @include w-h(20px, 20px);
+      transform: translateY(1px);
+    }
+  }
 }
 
-::-webkit-scrollbar-track {
-  border: solid 2px $color-orange;
+// In both HomePage and Navbar
+.tabs {
+  @include flexbox;
+  list-style: none;
+
+  .shop-all,
+  .anime-dropdown,
+  .merch-dropdown {
+    position: relative;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+      border-top: solid 2px white;
+      border-bottom: solid 2px white;
+    }
+
+    button {
+      color: white;
+      background-color: transparent;
+      border: none;
+      letter-spacing: 2px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    ul {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-rows: repeat(fit-content, auto);
+      width: 225px;
+      text-align: center;
+      list-style: none;
+      padding: 10px;
+      cursor: default;
+
+      li {
+        border-top: solid 2px transparent;
+        border-bottom: solid 2px transparent;
+        width: 100%;
+        font-size: 15px;
+        cursor: pointer;
+
+        &:hover {
+          border-top: solid 2px white;
+          border-bottom: solid 2px white;
+        }
+      }
+    }
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: $color-orange;
-  border: solid 2px white;
-}
+// ::-webkit-scrollbar {
+//   width: 20px;
+// }
+
+// ::-webkit-scrollbar-track {
+//   border: solid 2px $color-orange;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: $color-orange;
+//   border: solid 2px white;
+// }
 
 ///////////////
 // RAIN EFFECT
 ///////////////
-.rain-element {
-  position: fixed;
-  top: 0;
-  height: 200px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  animation: rain 7s linear infinite;
-  z-index: -5;
-}
+// .rain-element {
+//   position: fixed;
+//   top: 0;
+//   height: 200px;
+//   border-bottom-left-radius: 5px;
+//   border-bottom-right-radius: 5px;
+//   animation: rain 7s linear infinite;
+//   z-index: -5;
+// }
 
-.rain-element:nth-child(3n) {
-  background: linear-gradient(transparent, aqua);
-}
+// .rain-element:nth-child(3n) {
+//   background: linear-gradient(transparent, aqua);
+// }
 
-.rain-element:nth-child(3n + 1) {
-  background: linear-gradient(transparent, red);
-}
+// .rain-element:nth-child(3n + 1) {
+//   background: linear-gradient(transparent, red);
+// }
 
-.rain-element:nth-child(3n + 2) {
-  background: linear-gradient(transparent, $color-orange);
-}
+// .rain-element:nth-child(3n + 2) {
+//   background: linear-gradient(transparent, $color-orange);
+// }
 
 ////////////
 // HOMEPAGE
 ////////////
-.homepage {
-  @include flexbox(center, center);
-  @include h-w(100vh, 100vw);
-  position: absolute;
+.home-page {
+  @include w-h(100vw, 100vh);
+  display: grid;
+  grid-template-rows: 100px 100px 50px;
+  grid-template-columns: 100%;
+  padding: 30vh 20vw;
+  justify-items: center;
+  align-items: center;
   background-color: $color-orange;
   color: white;
-  z-index: 10;
+  overflow: auto;
 
-  div {
-    @include flexbox(column, center, center);
-    transform: translateY(-25%);
-
-    h1 {
-      font-size: 100px;
-      font-family: "Racing Sans One", cursive;
-      margin-bottom: 20px;
-      cursor: default;
-    }
-
-    input {
-      @include h-w(40px, 700px);
-      border: none;
-      border-radius: 20px;
-      margin-bottom: 30px;
-      padding-left: 20px;
-      padding-right: 40px;
-      color: rgb(77, 77, 77);
-      font-weight: 900;
-    }
-
-    .search-icon {
-      @include h-w(30px, 30px);
-      background-color: $color-orange;
-      border: none;
-      border-radius: 20px;
-      transform: translateX(-35px) translateY(2px);
-      padding: 0;
-      cursor: pointer;
-
-      img {
-        cursor: pointer;
-        @include h-w(20px, 20px);
-        transform: translateY(1.5px);
-      }
-    }
-
-    ul {
-      @include flexbox(row, center, center);
-      list-style: none;
-      padding: 10px 0;
-
-      li {
-        padding: 10px 20px;
-        font-size: 20px;
-        letter-spacing: 2px;
-        cursor: pointer;
-        border-top: solid 2px transparent;
-        border-bottom: solid 2px transparent;
-
-        button {
-          color: white;
-          background-color: transparent;
-          padding: 0;
-          border: none;
-          font-size: 20px;
-          cursor: pointer;
-        }
-
-        .dropdown-list {
-          ul {
-            @include flexbox(column, center, center);
-            text-align: center;
-            width: 250px;
-            list-style: none;
-            position: absolute;
-            transform: translateY(52%);
-            padding: 10px;
-            cursor: default;
-
-            li {
-              display: block;
-              font-size: 15px;
-              padding: 0;
-              width: 100%;
-              cursor: pointer;
-            }
-          }
-        }
-      }
-
-      li:hover {
-        border-top: solid 2px white;
-        border-bottom: solid 2px white;
-      }
-    }
+  h1 {
+    font-size: 100px;
+    font-family: "Racing Sans One", cursive;
+    line-height: 1;
+    cursor: default;
   }
 }
 
@@ -201,8 +218,10 @@ body {
 // NAVBAR
 //////////
 .navbar {
-  @include h-w(90px, 100vw);
+  @include w-h(100vw, 90px);
   position: fixed;
+  top: 0;
+  left: 0;
   display: grid;
   grid-template-columns: repeat(4, auto);
   gap: 20px;
@@ -216,454 +235,378 @@ body {
     rgba(100, 100, 100, 0.5) 95%,
     rgba(255, 255, 255, 0) 100%
   );
-  padding: 0 200px 0 200px;
+  padding: 0 10vw;
   z-index: 5;
 
   h1 {
     font-size: 40px;
     font-family: "Racing Sans One", cursive;
+    line-height: 1;
     cursor: pointer;
   }
 
-  form {
-    @include flexbox(row, center, center);
-    position: relative;
-
-    input {
-      @include h-w(40px, 700px);
-      border: none;
-      border-radius: 20px;
-      padding-left: 20px;
-      padding-right: 40px;
-      color: rgb(77, 77, 77);
-      font-weight: 900;
+  .shop-all,
+  .anime-dropdown,
+  .merch-dropdown {
+    button {
+      font-size: 17px;
     }
 
-    .search-icon {
-      @include h-w(30px, 30px);
-      background-color: $color-orange;
-      border: none;
-      border-radius: 20px;
-      right: 5px;
-      position: absolute;
-      cursor: pointer;
-
-      img {
-        cursor: pointer;
-        @include h-w(20px, 20px);
-        transform: translateX(-1px) translateY(1.5px);
+    .dropdown-list {
+      li {
+        background-color: $color-orange;
       }
-    }
-  }
-
-  ul {
-    @include flexbox(row, center, center);
-    list-style: none;
-    padding: 0;
-    column-gap: 15px;
-
-    .shop-all {
-      min-width: 100px;
-    }
-
-    .anime {
-      min-width: 65px;
-    }
-
-    .merch {
-      min-width: 145px;
-    }
-
-    .shop-all button,
-    .anime button,
-    .merch button {
-      border: none;
-      background-color: transparent;
-      padding: 0;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    li {
-      @include flexbox(column, center, center);
-      font-size: 15px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      padding: 10px;
-      border-top: solid 2px transparent;
-      border-bottom: solid 2px transparent;
-
-      .dropdown-list {
-        ul {
-          @include flexbox(column, center, center);
-          text-align: center;
-          width: 250px;
-          list-style: none;
-          position: absolute;
-          transform: translateX(-50%) translateY(12px);
-          padding: 10px;
-          cursor: default;
-          background-color: $color-orange;
-          opacity: 1;
-
-          li {
-            display: block;
-            font-size: 15px;
-            padding: 0;
-            width: 100%;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    li:hover {
-      border-top: solid 2px white;
-      border-bottom: solid 2px white;
     }
   }
 
   .shopping-cart {
     position: relative;
+
     .cart-image {
-      @include h-w(35px, 35px);
+      @include w-h(35px, 35px);
       cursor: pointer;
     }
 
     .cart-quantity {
-      @include h-w(1.2rem, 1.2rem);
-      font-size: 0.75rem;
-      text-align: center;
+      @include w-h(1.2rem, 1.2rem);
       position: absolute;
       top: 0;
       right: 0;
       transform: translate(10px, -10px);
+      font-size: 0.75rem;
+      text-align: center;
       background-color: red;
       border-radius: 0.5rem;
     }
   }
 }
 
+/////////////////////
+// SEARCH PAGE LAYOUT
+/////////////////////
+.search-page-layout {
+  @include w-h(100vw, 100vh);
+}
+
 ////////////////
 // SEARCH PAGE
 ////////////////
-.search-page {
-  @include flexbox(row, flex-start, center);
-  @include h-w(auto, 100%);
-  padding: 90px 200px 0px 200px;
+// .search-page {
+//   @include flexbox(row, flex-start, center);
+//   @include h-w(auto, 100%);
+//   padding: 90px 200px 0px 200px;
 
-  ///////////////
-  // FILTERS
-  ///////////////
-  .filters {
-    @include h-w(auto, 250px);
-    padding: 20px 40px 20px 0px;
-    color: black;
+//   ///////////////
+//   // FILTERS
+//   ///////////////
+//   .filters {
+//     @include h-w(auto, 250px);
+//     padding: 20px 40px 20px 0px;
+//     color: black;
 
-    h1 {
-      color: black;
-      cursor: default;
-      font-size: 17px;
-      margin-top: 10px;
-    }
+//     h1 {
+//       color: black;
+//       cursor: default;
+//       font-size: 17px;
+//       margin-top: 10px;
+//     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+//     ul {
+//       list-style: none;
+//       padding: 0;
 
-      li {
-        cursor: default;
-        font-size: 13px;
+//       li {
+//         cursor: default;
+//         font-size: 13px;
 
-        input,
-        label {
-          cursor: pointer;
-        }
-      }
-    }
+//         input,
+//         label {
+//           cursor: pointer;
+//         }
+//       }
+//     }
 
-    div {
-      display: grid;
-      grid-template-columns: 70px 1fr;
-      font-size: 13px;
+//     div {
+//       display: grid;
+//       grid-template-columns: 70px 1fr;
+//       font-size: 13px;
 
-      input {
-        @include h-w(auto, 4em);
-      }
+//       input {
+//         @include h-w(auto, 4em);
+//       }
 
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        appearance: none;
-        margin: 0;
-      }
-    }
+//       input::-webkit-outer-spin-button,
+//       input::-webkit-inner-spin-button {
+//         -webkit-appearance: none;
+//         appearance: none;
+//         margin: 0;
+//       }
+//     }
 
-    .min-price,
-    .max-price {
-      cursor: text;
-    }
+//     .min-price,
+//     .max-price {
+//       cursor: text;
+//     }
 
-    button {
-      cursor: pointer;
-      margin-top: 30px;
-    }
-  }
+//     button {
+//       cursor: pointer;
+//       margin-top: 30px;
+//     }
+//   }
 
-  ///////////////////
-  // ITEM CONTAINERS
-  ///////////////////
-  .item-container {
-    @include h-w(auto, calc(100% - 250px));
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 250px);
-    justify-content: space-between;
-    text-align: center;
-    padding: 20px;
-  }
+//   ///////////////////
+//   // ITEM CONTAINERS
+//   ///////////////////
+//   .item-container {
+//     @include h-w(auto, calc(100% - 250px));
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, 250px);
+//     justify-content: space-between;
+//     text-align: center;
+//     padding: 20px;
+//   }
 
-  .none-found {
-    @include h-w(auto, calc(100vw - 250px));
-    font-size: 40px;
-    padding: 40px 100px;
-  }
-}
+//   .none-found {
+//     @include h-w(auto, calc(100vw - 250px));
+//     font-size: 40px;
+//     padding: 40px 100px;
+//   }
+// }
 
-/////////
-// TILES
-/////////
-.tiles {
-  @include flexbox(column, center, center);
-  @include h-w(300px, 250px);
-  padding: 10px;
+// /////////
+// // TILES
+// /////////
+// .tiles {
+//   @include flexbox(column, center, center);
+//   @include h-w(300px, 250px);
+//   padding: 10px;
 
-  img {
-    @include h-w(220px, 220px);
-    object-fit: contain;
-    cursor: pointer;
-  }
+//   img {
+//     @include h-w(220px, 220px);
+//     object-fit: contain;
+//     cursor: pointer;
+//   }
 
-  .info-container {
-    @include flexbox(column, center, center);
-    font-size: 15px;
+//   .info-container {
+//     @include flexbox(column, center, center);
+//     font-size: 15px;
 
-    .name {
-      color: black;
-      cursor: pointer;
-    }
+//     .name {
+//       color: black;
+//       cursor: pointer;
+//     }
 
-    .price {
-      color: gray;
-      cursor: default;
-    }
-  }
-}
+//     .price {
+//       color: gray;
+//       cursor: default;
+//     }
+//   }
+// }
 
-////////////////////
-// DESCRIPTION PAGE
-////////////////////
-.desc-page {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 50px;
-  justify-items: center;
-  align-items: center;
-  padding: 110px 250px 0px 250px;
+// ////////////////////
+// // DESCRIPTION PAGE
+// ////////////////////
+// .desc-page {
+//   display: grid;
+//   grid-template-columns: 1fr 2fr;
+//   gap: 50px;
+//   justify-items: center;
+//   align-items: center;
+//   padding: 110px 250px 0px 250px;
 
-  .desc-imgs {
-    @include flexbox(column, center, center);
-  }
+//   .desc-imgs {
+//     @include flexbox(column, center, center);
+//   }
 
-  .display-img {
-    @include h-w(600px, 600px);
-    object-fit: contain;
-  }
+//   .display-img {
+//     @include h-w(600px, 600px);
+//     object-fit: contain;
+//   }
 
-  .desc-previews {
-    @include flexbox(row, center, center);
-    margin-top: 20px;
-  }
+//   .desc-previews {
+//     @include flexbox(row, center, center);
+//     margin-top: 20px;
+//   }
 
-  .preview {
-    @include h-w(75px, 75px);
-    object-fit: contain;
-    border: solid 1px black;
-    box-shadow: 2px 2px 15px black;
-    margin: 10px;
-    cursor: pointer;
-  }
+//   .preview {
+//     @include h-w(75px, 75px);
+//     object-fit: contain;
+//     border: solid 1px black;
+//     box-shadow: 2px 2px 15px black;
+//     margin: 10px;
+//     cursor: pointer;
+//   }
 
-  .preview-clicked {
-    box-shadow: none;
-    opacity: 0.5;
-  }
+//   .preview-clicked {
+//     box-shadow: none;
+//     opacity: 0.5;
+//   }
 
-  .desc-info {
-    @include flexbox(column, flex-start, flex-start);
-    @include h-w(100%, 100%);
-    margin: 50px 20px 0 20px;
+//   .desc-info {
+//     @include flexbox(column, flex-start, flex-start);
+//     @include h-w(100%, 100%);
+//     margin: 50px 20px 0 20px;
 
-    h1 {
-      width: 100%;
-      font-size: 40px;
-      text-align: left;
-      padding-bottom: 25px;
-      margin-bottom: 30px;
-      border-bottom: solid 1px black;
-    }
+//     h1 {
+//       width: 100%;
+//       font-size: 40px;
+//       text-align: left;
+//       padding-bottom: 25px;
+//       margin-bottom: 30px;
+//       border-bottom: solid 1px black;
+//     }
 
-    h3 {
-      margin-top: 30px;
-      margin-bottom: 10px;
-    }
+//     h3 {
+//       margin-top: 30px;
+//       margin-bottom: 10px;
+//     }
 
-    .desc-price-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      width: 100%;
+//     .desc-price-container {
+//       display: grid;
+//       grid-template-columns: repeat(3, 1fr);
+//       width: 100%;
 
-      h5 {
-        font-size: 30px;
-        align-self: center;
-      }
+//       h5 {
+//         font-size: 30px;
+//         align-self: center;
+//       }
 
-      ul {
-        list-style: none;
-        display: grid;
-        grid-template-columns: repeat(5, 70px);
-        padding: 0;
+//       ul {
+//         list-style: none;
+//         display: grid;
+//         grid-template-columns: repeat(5, 70px);
+//         padding: 0;
 
-        li {
-          @include h-w(70px, 70px);
-          padding: 10px;
-          box-shadow: none;
+//         li {
+//           @include h-w(70px, 70px);
+//           padding: 10px;
+//           box-shadow: none;
 
-          .size-button {
-            @include h-w(100%, 100%);
-            cursor: pointer;
-            border-radius: 50%;
-          }
+//           .size-button {
+//             @include h-w(100%, 100%);
+//             cursor: pointer;
+//             border-radius: 50%;
+//           }
 
-          .clicked {
-            color: white;
-            background-color: $color-orange;
-            box-shadow: inset 2px 2px 5px black;
-          }
-        }
-      }
+//           .clicked {
+//             color: white;
+//             background-color: $color-orange;
+//             box-shadow: inset 2px 2px 5px black;
+//           }
+//         }
+//       }
 
-      .desc-add {
-        @include h-w(50px, 120px);
-        padding: 10px;
-        font-size: 15px;
-        cursor: pointer;
-        background-color: $color-orange;
-        color: white;
-        align-self: center;
-        justify-self: end;
-        grid-column-start: 3;
+//       .desc-add {
+//         @include h-w(50px, 120px);
+//         padding: 10px;
+//         font-size: 15px;
+//         cursor: pointer;
+//         background-color: $color-orange;
+//         color: white;
+//         align-self: center;
+//         justify-self: end;
+//         grid-column-start: 3;
 
-        &:active {
-          box-shadow: inset 2px 2px 5px black;
-          color: rgb(0, 255, 0);
-        }
-      }
-    }
-  }
-}
+//         &:active {
+//           box-shadow: inset 2px 2px 5px black;
+//           color: rgb(0, 255, 0);
+//         }
+//       }
+//     }
+//   }
+// }
 
-//////////////////////
-// SHOPPING CART PAGE
-//////////////////////
-.cart-page {
-  @include flexbox(column, center, center);
-  padding: 110px 250px 100px 250px;
+// //////////////////////
+// // SHOPPING CART PAGE
+// //////////////////////
+// .cart-page {
+//   @include flexbox(column, center, center);
+//   padding: 110px 250px 100px 250px;
 
-  .cart-header {
-    @include h-w(auto, 1000px);
-    text-align: left;
-    font-size: 50px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid gray;
-  }
+//   .cart-header {
+//     @include h-w(auto, 1000px);
+//     text-align: left;
+//     font-size: 50px;
+//     padding-bottom: 30px;
+//     border-bottom: 1px solid gray;
+//   }
 
-  .cart-tile {
-    @include h-w(240px, 1000px);
-    display: grid;
-    grid-template-columns: 200px 1fr 50px 120px 50px 80px;
-    align-items: center;
-    justify-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid gray;
+//   .cart-tile {
+//     @include h-w(240px, 1000px);
+//     display: grid;
+//     grid-template-columns: 200px 1fr 50px 120px 50px 80px;
+//     align-items: center;
+//     justify-items: center;
+//     padding: 20px 0;
+//     border-bottom: 1px solid gray;
 
-    img {
-      @include h-w(200px, 200px);
-      object-fit: contain;
-    }
+//     img {
+//       @include h-w(200px, 200px);
+//       object-fit: contain;
+//     }
 
-    div {
-      width: 100%;
-      text-align: left;
-      padding: 0 30px;
+//     div {
+//       width: 100%;
+//       text-align: left;
+//       padding: 0 30px;
 
-      h3 {
-        align-self: center;
-        justify-items: center;
-        font-size: 20px;
-      }
+//       h3 {
+//         align-self: center;
+//         justify-items: center;
+//         font-size: 20px;
+//       }
 
-      h5 {
-        font-size: 14px;
-      }
+//       h5 {
+//         font-size: 14px;
+//       }
 
-      .qty {
-        margin-top: 20px;
-      }
+//       .qty {
+//         margin-top: 20px;
+//       }
 
-      input {
-        width: 3rem;
-        height: 1.5rem;
-        margin-left: 5px;
-      }
+//       input {
+//         width: 3rem;
+//         height: 1.5rem;
+//         margin-left: 5px;
+//       }
 
-      button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        padding: 0;
-        font-size: 10px;
-        color: blue;
-      }
+//       button {
+//         border: none;
+//         background-color: transparent;
+//         cursor: pointer;
+//         padding: 0;
+//         font-size: 10px;
+//         color: blue;
+//       }
 
-      button:active {
-        color: red;
-      }
-    }
+//       button:active {
+//         color: red;
+//       }
+//     }
 
-    h2 {
-      justify-self: flex-end;
-    }
-  }
+//     h2 {
+//       justify-self: flex-end;
+//     }
+//   }
 
-  .cart-total {
-    @include flexbox(column, flex-end, center);
-    @include h-w(auto, 1000px);
+//   .cart-total {
+//     @include flexbox(column, flex-end, center);
+//     @include h-w(auto, 1000px);
 
-    h1 {
-      margin: 10px 0;
-    }
+//     h1 {
+//       margin: 10px 0;
+//     }
 
-    button {
-      @include h-w(40px, 100px);
-      background-color: $color-orange;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
+//     button {
+//       @include h-w(40px, 100px);
+//       background-color: $color-orange;
+//       color: white;
+//       font-size: 15px;
+//       cursor: pointer;
 
-      &:active {
-        box-shadow: inset 2px 2px 5px black;
-      }
-    }
-  }
-}
+//       &:active {
+//         box-shadow: inset 2px 2px 5px black;
+//       }
+//     }
+//   }
+// }
