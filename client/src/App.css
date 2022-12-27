@@ -255,6 +255,9 @@ body {
   margin-top: 90px;
 }
 
+.filter-sidebar {
+  width: 180px;
+}
 .filter-sidebar ul {
   list-style: none;
   margin-bottom: 15px;
@@ -293,13 +296,21 @@ body {
 }
 
 .item-container {
-  width: 100vw;
+  width: calc(80vw - 180px);
   height: 100%;
+  position: relative;
   overflow: auto;
   display: grid;
   grid-template: repeat(auto-fill, 300px)/repeat(auto-fill, 300px);
   row-gap: 10px;
   justify-content: space-between;
+  padding: 10px;
+}
+.item-container .none-found {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .tiles {
@@ -309,15 +320,20 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  transition: 0.3s;
+  cursor: pointer;
 }
 .tiles img {
-  width: 80%;
   height: 80%;
-  cursor: pointer;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .tiles .info-container {
   text-align: center;
 }
-.tiles .info-container .name {
-  cursor: pointer;
+.tiles:hover {
+  box-shadow: 2px 2px 7px rgb(255, 115, 0), 2px -2px 7px rgb(255, 115, 0), -2px 2px 7px rgb(255, 115, 0), -2px -2px 7px rgb(255, 115, 0);
+  transform: translate(-2px, -2px);
+  transition: 0.3s;
 }/*# sourceMappingURL=App.css.map */

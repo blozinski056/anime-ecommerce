@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function Filters({ searchWord, category, filterTiles }) {
-  const [minPrice, setMinPrice] = React.useState(0);
-  const [maxPrice, setMaxPrice] = React.useState(0);
+  // const [minPrice, setMinPrice] = React.useState(0);
+  // const [maxPrice, setMaxPrice] = React.useState(0);
   const animeFilters = React.useMemo(
     () => [
       "ATTACK ON TITAN",
@@ -43,8 +43,8 @@ export default function Filters({ searchWord, category, filterTiles }) {
     merchFilters.forEach((merch) => {
       document.querySelector(`[name='${merch}']`).checked = false;
     });
-    setMinPrice(0);
-    setMaxPrice(0);
+    // setMinPrice(0);
+    // setMaxPrice(0);
     document.querySelector(".min-price").value = "";
     document.querySelector(".max-price").value = "";
     document.querySelector(".max-price").min = 0;
@@ -55,52 +55,58 @@ export default function Filters({ searchWord, category, filterTiles }) {
     ) {
       document.querySelector(`[name='${category[1]}']`).checked = true;
     }
-    if (
-      animeFilters.includes(searchWord) ||
-      merchFilters.includes(searchWord)
-    ) {
-      document.querySelector(`[name='${searchWord}']`).checked = true;
-    }
+    // if (
+    //   animeFilters.includes(searchWord.toUpperCase()) ||
+    //   merchFilters.includes(searchWord.toUpperCase())
+    // ) {
+    //   document.querySelector(
+    //     `[name='${searchWord.toUpperCase()}']`
+    //   ).checked = true;
+    // }
   }, [searchWord, category, animeFilters, merchFilters]);
 
   // Finds all checked boxes and values
   function getInputs(event) {
     event.preventDefault();
-    // let animeWords = [];
-    // let merchWords = [];
-    let categoryWords = [];
-    let priceRange = [minPrice, maxPrice];
+    let animeWords = [];
+    let merchWords = [];
+    // let categoryWords = [];
+    const min = document.querySelector(".min-price").value;
+    const max = document.querySelector(".max-price").value;
+    let priceRange = [min, max];
+    console.log(priceRange);
+
     animeFilters.forEach((anime) => {
       const a = document.querySelector(`[name='${anime}']`);
       if (a.checked) {
-        // animeWords.push(anime);
-        categoryWords.push(anime);
+        animeWords.push(anime);
+        // categoryWords.push(anime);
       }
     });
     merchFilters.forEach((merch) => {
       const m = document.querySelector(`[name='${merch}']`);
       if (m.checked) {
-        // merchWords.push(merch);
-        categoryWords.push(merch);
+        merchWords.push(merch);
+        // categoryWords.push(merch);
       }
     });
-    // filterTiles(searchWord, animeWords, merchWords, priceRange);
-    filterTiles(searchWord, categoryWords, priceRange);
+    filterTiles(searchWord, animeWords, merchWords, priceRange);
+    // filterTiles(searchWord, categoryWords, priceRange);
   }
 
   // If minimum value is input, sets min for maxPrice
   // If maxPrice already exists before min value is input, maxPrice will be notified is below min value
-  function minPriceVal(event) {
-    const min = event.target.value;
-    const mp = document.querySelector(".max-price");
-    mp.min = min;
-    setMinPrice(min);
-  }
+  // function minPriceVal(event) {
+  //   const min = event.target.value;
+  //   const mp = document.querySelector(".max-price");
+  //   mp.min = min;
+  //   setMinPrice(min);
+  // }
 
-  function maxPriceVal(event) {
-    const max = event.target.value;
-    setMaxPrice(max);
-  }
+  // function maxPriceVal(event) {
+  //   const max = event.target.value;
+  //   setMaxPrice(max);
+  // }
 
   return (
     <form className="filter-sidebar" onSubmit={getInputs}>
@@ -217,7 +223,7 @@ export default function Filters({ searchWord, category, filterTiles }) {
         <span>Min. Price:</span>
         <input
           className="min-price"
-          onChange={minPriceVal}
+          // onChange={minPriceVal}
           min={0}
           type="number"
           placeholder="Min $"
@@ -227,7 +233,7 @@ export default function Filters({ searchWord, category, filterTiles }) {
         <span>Max. Price:</span>
         <input
           className="max-price"
-          onChange={maxPriceVal}
+          // onChange={maxPriceVal}
           min={0}
           type="number"
           placeholder="Max $"

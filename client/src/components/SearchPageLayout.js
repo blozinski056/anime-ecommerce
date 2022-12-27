@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import FilterSidebar from "./FilterSidebar.js";
 import ItemContainer from "./ItemContainer.js";
 
-export default function SearchPageLayout({ allTiles }) {
+export default function SearchPageLayout({ allTiles, clickToggle }) {
   const { param1, param2 } = useParams();
   const [searchWord, setSearchWord] = React.useState("");
   const [category, setCategory] = React.useState([]);
@@ -18,7 +18,7 @@ export default function SearchPageLayout({ allTiles }) {
   const filterTiles = React.useCallback(
     (searchWords, animeWords, merchWords, priceRange) => {
       // filter based on search word
-      let filtered = filtering(searchWords, allTiles);
+      let filtered = filtering(searchWords.toUpperCase(), allTiles);
 
       // filter based animes that were checked in filter tab
       if (animeWords.length > 0) {
@@ -40,17 +40,19 @@ export default function SearchPageLayout({ allTiles }) {
 
       // filter based on price range
       if (priceRange[0] || priceRange[1]) {
-        let min, max;
-        priceRange[0] ? (min = priceRange[0]) : (min = 0);
-        priceRange[1] ? (max = priceRange[1]) : (max = Number.MAX_SAFE_INTEGER);
+        let min = priceRange[0] ? priceRange[0] : 0;
+        let max = priceRange[1] ? priceRange[1] : Number.MAX_SAFE_INTEGER;
+        console.log(min, max);
         let tempArray = [];
         filtered.forEach((tile) => {
-          if (tile.props.price >= min && tile.props.price <= max) {
+          if (tile.props.item.price >= min && tile.props.item.price <= max) {
             tempArray.push(tile);
           }
         });
         filtered = tempArray;
       }
+      console.log(filtered);
+
       console.log("end of filtering");
 
       setTilesArray(filtered);
@@ -79,16 +81,6 @@ export default function SearchPageLayout({ allTiles }) {
       }
     }
   }, [param1, param2]);
-
-  React.useEffect(() => {
-    if (category[0] === "ANIME") {
-      filterTiles(searchWord, [category[1]], [], []);
-    } else if (category[0] === "MERCH") {
-      filterTiles(searchWord, [], [category[1]], []);
-    } else {
-      filterTiles(searchWord, [], [], []);
-    }
-  }, [filterTiles, searchWord, category]);
 
   // Used in filterTiles()
   // Returns new array based on give word
@@ -140,6 +132,16 @@ export default function SearchPageLayout({ allTiles }) {
     }
     return f;
   }
+
+  React.useEffect(() => {
+    if (category[0] === "ANIME") {
+      filterTiles(searchWord, [category[1]], [], []);
+    } else if (category[0] === "MERCH") {
+      filterTiles(searchWord, [], [category[1]], []);
+    } else {
+      filterTiles(searchWord, [], [], []);
+    }
+  }, [filterTiles, searchWord, category, clickToggle]);
 
   return (
     <section className="search-page-layout">

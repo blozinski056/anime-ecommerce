@@ -14,6 +14,7 @@ import { data } from "./components/data.js";
 export default function App() {
   const [cart, setCart] = React.useState([]);
   const [itemDetails, setItemDetails] = React.useState({});
+  const [clickToggle, setClickToggle] = React.useState(false);
 
   // const allTiles = data.map((item) => {
   //   return <Tiles key={item.id} item={item} />;
@@ -30,10 +31,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route element={<Navbar cart={cart} />}>
+      <Route element={<Navbar cart={cart} setClickToggle={setClickToggle} />}>
         <Route
           path="items/search/:param1?/:param2?"
-          element={<SearchPageLayout allTiles={allTiles} />}
+          element={
+            <SearchPageLayout allTiles={allTiles} clickToggle={clickToggle} />
+          }
         />
         <Route
           path="items/:itemid"

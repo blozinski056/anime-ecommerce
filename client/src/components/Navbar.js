@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 
-export default function Navbar({ cart }) {
+export default function Navbar({ cart, setClickToggle }) {
   const [showAnime, setShowAnime] = React.useState(false);
   const [showMerch, setShowMerch] = React.useState(false);
   const navigate = useNavigate();
@@ -13,9 +13,30 @@ export default function Navbar({ cart }) {
     navigate(`/items/search/${word}`);
   }
 
+  function shopAll() {
+    // setClickToggle((prevClickToggle) => !prevClickToggle);
+    setClickToggle((prevClickToggle) => {
+      console.log(prevClickToggle);
+      return !prevClickToggle;
+    });
+    document.querySelector(".search-bar").value = "";
+    document.querySelector(".min-price").value = "";
+    document.querySelector(".max-price").value = "";
+    navigate("/items/search");
+  }
+
   function searchCategory(categoryWord, group) {
     // category word will be upper case
     const word = "".concat(group.toUpperCase(), categoryWord.toUpperCase());
+    console.log("click");
+
+    setClickToggle((prevClickToggle) => {
+      console.log(prevClickToggle);
+      return !prevClickToggle;
+    });
+    document.querySelector(".search-bar").value = "";
+    document.querySelector(".min-price").value = "";
+    document.querySelector(".max-price").value = "";
     navigate(`/items/search/${word}`);
   }
 
@@ -39,7 +60,7 @@ export default function Navbar({ cart }) {
           </button>
         </form>
         <ul className="tabs">
-          <li className="shop-all" onClick={() => navigate("/items/search")}>
+          <li className="shop-all" onClick={() => shopAll()}>
             <button>SHOP ALL</button>
           </li>
           <li

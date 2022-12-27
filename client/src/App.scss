@@ -296,6 +296,7 @@ body {
 // FILTER SIDEBAR
 /////////////////
 .filter-sidebar {
+  width: 180px;
   ul {
     list-style: none;
     margin-bottom: 15px;
@@ -342,12 +343,21 @@ body {
 // ITEM CONTAINER
 /////////////////
 .item-container {
-  @include w-h(100vw, 100%);
+  @include w-h(calc(80vw - 180px), 100%);
+  position: relative;
   overflow: auto;
   display: grid;
   grid-template: repeat(auto-fill, 300px) / repeat(auto-fill, 300px);
   row-gap: 10px;
   justify-content: space-between;
+  padding: 10px;
+
+  .none-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 ////////
@@ -356,135 +366,26 @@ body {
 .tiles {
   @include w-h(300px, 300px);
   @include flexbox($fd: column, $jc: flex-start);
+  transition: 0.3s;
+  cursor: pointer;
 
   img {
-    @include w-h(80%, 80%);
-    cursor: pointer;
+    height: 80%;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .info-container {
     text-align: center;
+  }
 
-    .name {
-      cursor: pointer;
-    }
+  &:hover {
+    box-shadow: 2px 2px 7px $color-orange, 2px -2px 7px $color-orange,
+      -2px 2px 7px $color-orange, -2px -2px 7px $color-orange;
+    transform: translate(-2px, -2px);
+    transition: 0.3s;
   }
 }
-
-////////////////
-// SEARCH PAGE
-////////////////
-// .search-page {
-//   @include flexbox(row, flex-start, center);
-//   @include h-w(auto, 100%);
-//   padding: 90px 200px 0px 200px;
-
-//   ///////////////
-//   // FILTERS
-//   ///////////////
-//   .filters {
-//     @include h-w(auto, 250px);
-//     padding: 20px 40px 20px 0px;
-//     color: black;
-
-//     h1 {
-//       color: black;
-//       cursor: default;
-//       font-size: 17px;
-//       margin-top: 10px;
-//     }
-
-//     ul {
-//       list-style: none;
-//       padding: 0;
-
-//       li {
-//         cursor: default;
-//         font-size: 13px;
-
-//         input,
-//         label {
-//           cursor: pointer;
-//         }
-//       }
-//     }
-
-//     div {
-//       display: grid;
-//       grid-template-columns: 70px 1fr;
-//       font-size: 13px;
-
-//       input {
-//         @include h-w(auto, 4em);
-//       }
-
-//       input::-webkit-outer-spin-button,
-//       input::-webkit-inner-spin-button {
-//         -webkit-appearance: none;
-//         appearance: none;
-//         margin: 0;
-//       }
-//     }
-
-//     .min-price,
-//     .max-price {
-//       cursor: text;
-//     }
-
-//     button {
-//       cursor: pointer;
-//       margin-top: 30px;
-//     }
-//   }
-
-//   ///////////////////
-//   // ITEM CONTAINERS
-//   ///////////////////
-//   .item-container {
-//     @include h-w(auto, calc(100% - 250px));
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, 250px);
-//     justify-content: space-between;
-//     text-align: center;
-//     padding: 20px;
-//   }
-
-//   .none-found {
-//     @include h-w(auto, calc(100vw - 250px));
-//     font-size: 40px;
-//     padding: 40px 100px;
-//   }
-// }
-
-// /////////
-// // TILES
-// /////////
-// .tiles {
-//   @include flexbox(column, center, center);
-//   @include h-w(300px, 250px);
-//   padding: 10px;
-
-//   img {
-//     @include h-w(220px, 220px);
-//     object-fit: contain;
-//     cursor: pointer;
-//   }
-
-//   .info-container {
-//     @include flexbox(column, center, center);
-//     font-size: 15px;
-
-//     .name {
-//       color: black;
-//       cursor: pointer;
-//     }
-
-//     .price {
-//       color: gray;
-//       cursor: default;
-//     }
-//   }
-// }
 
 // ////////////////////
 // // DESCRIPTION PAGE
