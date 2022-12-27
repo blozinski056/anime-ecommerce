@@ -15,7 +15,7 @@ export default function Navbar({ cart }) {
 
   function searchCategory(categoryWord, group) {
     // category word will be upper case
-    const word = categoryWord.toUpperCase();
+    const word = "".concat(group.toUpperCase(), categoryWord.toUpperCase());
     navigate(`/items/search/${word}`);
   }
 

@@ -61,6 +61,7 @@ $font-kdam: "Kdam Thmor Pro", sans-serif;
 
 body {
   @include flexbox;
+  overflow: hidden;
 }
 
 // In both HomePage and Navbar
@@ -153,18 +154,19 @@ body {
   }
 }
 
-// ::-webkit-scrollbar {
-//   width: 20px;
-// }
+::-webkit-scrollbar {
+  width: 20px;
+}
 
-// ::-webkit-scrollbar-track {
-//   border: solid 2px $color-orange;
-// }
+::-webkit-scrollbar-track {
+  border: solid 2px $color-orange;
+  margin: 10px 0;
+}
 
-// ::-webkit-scrollbar-thumb {
-//   background-color: $color-orange;
-//   border: solid 2px white;
-// }
+::-webkit-scrollbar-thumb {
+  background-color: $color-orange;
+  border: solid 2px white;
+}
 
 ///////////////
 // RAIN EFFECT
@@ -192,7 +194,7 @@ body {
 // }
 
 ////////////
-// HOMEPAGE
+// HOME PAGE
 ////////////
 .home-page {
   @include w-h(100vw, 100vh);
@@ -214,9 +216,9 @@ body {
   }
 }
 
-//////////
+/////////
 // NAVBAR
-//////////
+/////////
 .navbar {
   @include w-h(100vw, 90px);
   position: fixed;
@@ -227,7 +229,6 @@ body {
   gap: 20px;
   align-items: center;
   justify-content: space-between;
-
   color: white;
   background: linear-gradient(
     180deg,
@@ -285,7 +286,27 @@ body {
 // SEARCH PAGE LAYOUT
 /////////////////////
 .search-page-layout {
-  @include w-h(100vw, 100vh);
+  @include flexbox;
+  @include w-h(100vw, calc(100vh - 90px));
+  padding: 0 10vw;
+  margin-top: 90px;
+}
+
+/////////////////
+// FILTER SIDEBAR
+/////////////////
+.filter-sidebar {
+  ul {
+    list-style: none;
+  }
+}
+
+/////////////////
+// ITEM CONTAINER
+/////////////////
+.item-container {
+  @include w-h(100vw, calc(100vh - 90px));
+  overflow: auto;
 }
 
 ////////////////

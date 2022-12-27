@@ -8,10 +8,24 @@ import SearchPageLayout from "./components/SearchPageLayout";
 import ItemDescription from "./components/ItemDescription";
 import ShoppingCart from "./components/ShoppingCart";
 import WrongPage from "./components/WrongPage";
+import Tiles from "./components/Tiles";
+import { data } from "./components/data.js";
 
 export default function App() {
   const [cart, setCart] = React.useState([]);
   const [itemDetails, setItemDetails] = React.useState({});
+
+  // const allTiles = data.map((item) => {
+  //   return <Tiles key={item.id} item={item} />;
+  // });
+  const allTiles = React.useMemo(() => {
+    let newArray = data.map((item) => {
+      return (
+        <Tiles key={item.id} item={item} setItemDetails={setItemDetails} />
+      );
+    });
+    return newArray;
+  }, [setItemDetails]);
 
   return (
     <Routes>
@@ -19,7 +33,7 @@ export default function App() {
       <Route element={<Navbar cart={cart} />}>
         <Route
           path="items/search/:param1?/:param2?"
-          element={<SearchPageLayout setItemDetails={setItemDetails} />}
+          element={<SearchPageLayout allTiles={allTiles} />}
         />
         <Route
           path="items/:itemid"

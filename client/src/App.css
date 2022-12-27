@@ -58,6 +58,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .search-form {
@@ -156,6 +157,20 @@ body {
   border-bottom: solid 2px white;
 }
 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  border: solid 2px rgb(255, 115, 0);
+  margin: 10px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 115, 0);
+  border: solid 2px white;
+}
+
 .home-page {
   width: 100vw;
   height: 100vh;
@@ -230,6 +245,22 @@ body {
 }
 
 .search-page-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 90px);
+  padding: 0 10vw;
+  margin-top: 90px;
+}
+
+.filter-sidebar ul {
+  list-style: none;
+}
+
+.item-container {
+  width: 100vw;
+  height: calc(100vh - 90px);
+  overflow: auto;
 }/*# sourceMappingURL=App.css.map */
