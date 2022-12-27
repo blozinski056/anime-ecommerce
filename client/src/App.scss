@@ -286,9 +286,9 @@ body {
 // SEARCH PAGE LAYOUT
 /////////////////////
 .search-page-layout {
-  @include flexbox;
+  @include flexbox($ai: flex-start);
   @include w-h(100vw, calc(100vh - 90px));
-  padding: 0 10vw;
+  padding: 2vh 10vw 2vh 10vw;
   margin-top: 90px;
 }
 
@@ -298,6 +298,43 @@ body {
 .filter-sidebar {
   ul {
     list-style: none;
+    margin-bottom: 15px;
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+
+      input {
+        cursor: pointer;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 15px;
+  }
+
+  div {
+    @include flexbox($jc: space-between);
+
+    span {
+      font-size: 12px;
+    }
+
+    input {
+      width: 60%;
+    }
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 2px 5px;
+    background-color: $color-orange;
+    border: solid 1px rgb(0, 0, 0);
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
   }
 }
 
@@ -305,8 +342,33 @@ body {
 // ITEM CONTAINER
 /////////////////
 .item-container {
-  @include w-h(100vw, calc(100vh - 90px));
+  @include w-h(100vw, 100%);
   overflow: auto;
+  display: grid;
+  grid-template: repeat(auto-fill, 300px) / repeat(auto-fill, 300px);
+  row-gap: 10px;
+  justify-content: space-between;
+}
+
+////////
+// TILES
+////////
+.tiles {
+  @include w-h(300px, 300px);
+  @include flexbox($fd: column, $jc: flex-start);
+
+  img {
+    @include w-h(80%, 80%);
+    cursor: pointer;
+  }
+
+  .info-container {
+    text-align: center;
+
+    .name {
+      cursor: pointer;
+    }
+  }
 }
 
 ////////////////

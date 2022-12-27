@@ -10,16 +10,6 @@ export default function SearchPageLayout({ allTiles }) {
   const [category, setCategory] = React.useState([]);
   const [tilesArray, setTilesArray] = React.useState([]);
 
-  // const allTiles = React.useMemo(() => {
-  //   let newArray = data.map((item) => {
-  //     return (
-  //       <Tiles key={item.id} item={item} setItemDetails={setItemDetails} />
-  //     );
-  //   });
-  //   return newArray;
-  // }, [setItemDetails]);
-  // const [tilesArray, setTilesArray] = React.useState(allTiles);
-
   console.log(param1, param2);
 
   // Used on 'HomePage', 'Navbar', and search page 'Filters'

@@ -10,7 +10,7 @@ export default function Tiles({ item, setItemDetails }) {
   }
 
   return (
-    <section className="tiles">
+    <div className="tiles">
       <img
         className="tile-img"
         src={item.image}
@@ -24,6 +24,6 @@ export default function Tiles({ item, setItemDetails }) {
         </h5>
         <h5 className="price">${item.price}</h5>
       </div>
-    </section>
+    </div>
   );
 }

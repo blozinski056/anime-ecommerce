@@ -247,20 +247,77 @@ body {
 .search-page-layout {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100vw;
   height: calc(100vh - 90px);
-  padding: 0 10vw;
+  padding: 2vh 10vw 2vh 10vw;
   margin-top: 90px;
 }
 
 .filter-sidebar ul {
   list-style: none;
+  margin-bottom: 15px;
+}
+.filter-sidebar ul label {
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.filter-sidebar ul label input {
+  cursor: pointer;
+}
+.filter-sidebar h1 {
+  font-size: 15px;
+}
+.filter-sidebar div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.filter-sidebar div span {
+  font-size: 12px;
+}
+.filter-sidebar div input {
+  width: 60%;
+}
+.filter-sidebar button {
+  margin-top: 15px;
+  padding: 2px 5px;
+  background-color: rgb(255, 115, 0);
+  border: solid 1px rgb(0, 0, 0);
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
 }
 
 .item-container {
   width: 100vw;
-  height: calc(100vh - 90px);
+  height: 100%;
   overflow: auto;
+  display: grid;
+  grid-template: repeat(auto-fill, 300px)/repeat(auto-fill, 300px);
+  row-gap: 10px;
+  justify-content: space-between;
+}
+
+.tiles {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tiles img {
+  width: 80%;
+  height: 80%;
+  cursor: pointer;
+}
+.tiles .info-container {
+  text-align: center;
+}
+.tiles .info-container .name {
+  cursor: pointer;
 }/*# sourceMappingURL=App.css.map */

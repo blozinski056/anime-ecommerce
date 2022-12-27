@@ -35,7 +35,7 @@ export default function Navbar({ cart }) {
         <form className="search-form" onSubmit={search}>
           <input className="search-bar" placeholder="Search" type="text" />
           <button className="search-icon" type="submit">
-            <img src="../images/search-white-2.png" alt="" />
+            <img src="/images/search-white-2.png" alt="" />
           </button>
         </form>
         <ul className="tabs">
@@ -146,7 +146,7 @@ export default function Navbar({ cart }) {
         <div className="shopping-cart" onClick={() => navigate("/cart")}>
           <img
             className="cart-image"
-            src="../images/shopping-cart-white.png"
+            src="/images/shopping-cart-white.png"
             alt=""
           />
           {cart.length > 0 && (

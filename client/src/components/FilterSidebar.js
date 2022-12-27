@@ -105,7 +105,7 @@ export default function Filters({ searchWord, category, filterTiles }) {
   return (
     <form className="filter-sidebar" onSubmit={getInputs}>
       <ul className="anime">
-        <h1>Anime</h1>
+        <h1>ANIME</h1>
         <li>
           <label>
             <input name="ATTACK ON TITAN" type="checkbox" /> Attack on Titan
@@ -174,7 +174,7 @@ export default function Filters({ searchWord, category, filterTiles }) {
         </li>
       </ul>
       <ul className="merch">
-        <h1>Type of Merchandise</h1>
+        <h1>MERCHANDISE</h1>
         <li>
           <label>
             <input name="CREWNECK" type="checkbox" /> Crewnecks
@@ -212,7 +212,7 @@ export default function Filters({ searchWord, category, filterTiles }) {
           </label>
         </li>
       </ul>
-      <h1>Price Range</h1>
+      <h1>PRICE RANGE</h1>
       <div>
         <span>Min. Price:</span>
         <input
