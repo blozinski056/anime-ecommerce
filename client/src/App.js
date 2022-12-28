@@ -25,32 +25,37 @@ export default function App() {
     return newArray;
   }, [setItemDetails]);
 
-  function updateCart(itemObj, itemSize, itemQuantity) {
-    let tempCart = [];
-    let foundMatch = false;
-    console.log(cart);
+  const updateCart = React.useCallback(
+    (itemObj, itemSize, itemQuantity) => {
+      let tempCart = [];
+      let foundMatch = false;
+      console.log(cart);
 
-    cart.forEach((item) => {
-      console.log(item);
-      if (item.obj.title === itemObj.title && item.size === itemSize) {
-        tempCart.push({
-          obj: item.obj,
-          size: item.size,
-          quantity: item.quantity + itemQuantity,
-        });
-        foundMatch = true;
-      } else {
-        tempCart.push({ ...item });
+      cart.forEach((item) => {
+        console.log(item);
+        if (item.obj.title === itemObj.title && item.size === itemSize) {
+          if (item.quantity + itemQuantity !== 0) {
+            tempCart.push({
+              obj: item.obj,
+              size: item.size,
+              quantity: item.quantity + itemQuantity,
+            });
+          }
+          foundMatch = true;
+        } else {
+          tempCart.push({ ...item });
+        }
+      });
+
+      if (!foundMatch) {
+        tempCart.push({ obj: itemObj, size: itemSize, quantity: itemQuantity });
       }
-    });
+      console.log(tempCart);
 
-    if (!foundMatch) {
-      tempCart.push({ obj: itemObj, size: itemSize, quantity: itemQuantity });
-    }
-    console.log(tempCart);
-
-    setCart(tempCart);
-  }
+      setCart(tempCart);
+    },
+    [cart]
+  );
 
   return (
     <Routes>
@@ -71,7 +76,10 @@ export default function App() {
             />
           }
         />
-        <Route path="cart" element={<ShoppingCart />} />
+        <Route
+          path="cart"
+          element={<ShoppingCart cart={cart} updateCart={updateCart} />}
+        />
       </Route>
       <Route path="*" element={<WrongPage />} />
     </Routes>
