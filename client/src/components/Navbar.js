@@ -16,7 +16,6 @@ export default function Navbar({ cart, setClickToggle }) {
   function shopAll() {
     // setClickToggle((prevClickToggle) => !prevClickToggle);
     setClickToggle((prevClickToggle) => {
-      console.log(prevClickToggle);
       return !prevClickToggle;
     });
     document.querySelector(".search-bar").value = "";
@@ -30,10 +29,8 @@ export default function Navbar({ cart, setClickToggle }) {
   function searchCategory(categoryWord, group) {
     // category word will be upper case
     const word = "".concat(group.toUpperCase(), categoryWord.toUpperCase());
-    console.log("click");
 
     setClickToggle((prevClickToggle) => {
-      console.log(prevClickToggle);
       return !prevClickToggle;
     });
     document.querySelector(".search-bar").value = "";

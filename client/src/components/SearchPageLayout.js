@@ -10,8 +10,6 @@ export default function SearchPageLayout({ allTiles, clickToggle }) {
   const [category, setCategory] = React.useState([]);
   const [tilesArray, setTilesArray] = React.useState([]);
 
-  console.log(param1, param2);
-
   // Used on 'HomePage', 'Navbar', and search page 'Filters'
   // Takes into account the searched keyword before filters for anime, merch, and price range
   // Sets 'filteredTiles' to display on search page
@@ -42,7 +40,6 @@ export default function SearchPageLayout({ allTiles, clickToggle }) {
       if (priceRange[0] || priceRange[1]) {
         let min = priceRange[0] ? priceRange[0] : 0;
         let max = priceRange[1] ? priceRange[1] : Number.MAX_SAFE_INTEGER;
-        console.log(min, max);
         let tempArray = [];
         filtered.forEach((tile) => {
           if (tile.props.item.price >= min && tile.props.item.price <= max) {
@@ -51,36 +48,11 @@ export default function SearchPageLayout({ allTiles, clickToggle }) {
         });
         filtered = tempArray;
       }
-      console.log(filtered);
-
-      console.log("end of filtering");
 
       setTilesArray(filtered);
     },
     [allTiles]
   );
-
-  // Determine which parameter is the search word and which is the category
-  React.useEffect(() => {
-    if (param1 === undefined) {
-      setSearchWord("");
-      setCategory([]);
-    } else if (param1 === param1.toUpperCase()) {
-      setCategory([param1.slice(0, 5), param1.slice(5)]);
-      if (param2 === undefined) {
-        setSearchWord("");
-      } else {
-        setSearchWord(param2);
-      }
-    } else {
-      setSearchWord(param1);
-      if (param2 === undefined) {
-        setCategory([]);
-      } else {
-        setCategory([param2.slice(0, 5), param2.slice(5)]);
-      }
-    }
-  }, [param1, param2]);
 
   // Used in filterTiles()
   // Returns new array based on give word
@@ -132,6 +104,28 @@ export default function SearchPageLayout({ allTiles, clickToggle }) {
     }
     return f;
   }
+
+  // Determine which parameter is the search word and which is the category
+  React.useEffect(() => {
+    if (param1 === undefined) {
+      setSearchWord("");
+      setCategory([]);
+    } else if (param1 === param1.toUpperCase()) {
+      setCategory([param1.slice(0, 5), param1.slice(5)]);
+      if (param2 === undefined) {
+        setSearchWord("");
+      } else {
+        setSearchWord(param2);
+      }
+    } else {
+      setSearchWord(param1);
+      if (param2 === undefined) {
+        setCategory([]);
+      } else {
+        setCategory([param2.slice(0, 5), param2.slice(5)]);
+      }
+    }
+  }, [param1, param2]);
 
   React.useEffect(() => {
     if (category[0] === "ANIME") {

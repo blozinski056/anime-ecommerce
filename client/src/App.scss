@@ -398,6 +398,7 @@ body {
   grid-template-columns: 1fr 1.5fr;
   gap: 50px;
   align-items: flex-start;
+  overflow-y: auto;
 
   .img-container {
     @include flexbox($fd: column, $jc: flex-start);
@@ -445,6 +446,7 @@ body {
     .item-price-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 60px 1fr;
       width: 100%;
       padding: 15px 0;
 
@@ -453,14 +455,38 @@ body {
         align-self: center;
       }
 
+      .item-add {
+        @include w-h(114px, 37px);
+        position: relative;
+        padding: 5px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        background-color: $color-orange;
+        color: white;
+        align-self: center;
+        justify-self: start;
+        grid-row: 2;
+        grid-column: 1;
+        transition: 0.3s;
+
+        &:active {
+          box-shadow: inset 2px 2px 5px black;
+        }
+
+        &.added {
+          transition: 0.3s;
+          background-color: green;
+        }
+      }
+
       .item-size-buttons {
         list-style: none;
         display: grid;
         grid-template-columns: repeat(5, 70px);
 
         li {
-          @include w-h(70px, 70px);
-          padding: 10px;
+          @include w-h(60px, 60px);
+          padding: 5px;
 
           .size-button {
             @include w-h(100%, 100%);
@@ -474,16 +500,6 @@ body {
             }
           }
         }
-      }
-
-      .item-add {
-        padding: 5px 10px;
-        font-size: 15px;
-        cursor: pointer;
-        background-color: $color-orange;
-        color: white;
-        align-self: center;
-        justify-self: end;
       }
     }
 
@@ -499,6 +515,8 @@ body {
     }
 
     .reviews {
+      height: 300px;
+      overflow-y: auto;
       list-style: none;
 
       li {
@@ -517,6 +535,11 @@ body {
             @include w-h(20px, 20px);
             object-fit: contain;
           }
+        }
+
+        p {
+          height: 100px;
+          overflow-y: auto;
         }
       }
     }

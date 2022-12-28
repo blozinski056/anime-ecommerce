@@ -16,9 +16,6 @@ export default function App() {
   const [itemDetails, setItemDetails] = React.useState({});
   const [clickToggle, setClickToggle] = React.useState(false);
 
-  // const allTiles = data.map((item) => {
-  //   return <Tiles key={item.id} item={item} />;
-  // });
   const allTiles = React.useMemo(() => {
     let newArray = data.map((item) => {
       return (
@@ -27,6 +24,33 @@ export default function App() {
     });
     return newArray;
   }, [setItemDetails]);
+
+  function updateCart(itemObj, itemSize, itemQuantity) {
+    let tempCart = [];
+    let foundMatch = false;
+    console.log(cart);
+
+    cart.forEach((item) => {
+      console.log(item);
+      if (item.obj.title === itemObj.title && item.size === itemSize) {
+        tempCart.push({
+          obj: item.obj,
+          size: item.size,
+          quantity: item.quantity + itemQuantity,
+        });
+        foundMatch = true;
+      } else {
+        tempCart.push({ ...item });
+      }
+    });
+
+    if (!foundMatch) {
+      tempCart.push({ obj: itemObj, size: itemSize, quantity: itemQuantity });
+    }
+    console.log(tempCart);
+
+    setCart(tempCart);
+  }
 
   return (
     <Routes>
@@ -41,7 +65,10 @@ export default function App() {
         <Route
           path="items/:itemid"
           element={
-            <ItemDescription itemDetails={itemDetails} setCart={setCart} />
+            <ItemDescription
+              itemDetails={itemDetails}
+              updateCart={updateCart}
+            />
           }
         />
         <Route path="cart" element={<ShoppingCart />} />

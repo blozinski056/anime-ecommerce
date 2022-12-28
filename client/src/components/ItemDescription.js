@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ItemDescription({ itemDetails, setCart }) {
+export default function ItemDescription({ itemDetails, updateCart }) {
   const [size, setSize] = React.useState("M");
   const [preview, setPreview] = React.useState(itemDetails.image);
 
@@ -36,14 +36,17 @@ export default function ItemDescription({ itemDetails, setCart }) {
   }
 
   function add() {
-    // updateCart(
-    //   itemDetails.image,
-    //   itemDetails.name,
-    //   itemDetails.price,
-    //   itemDetails.clothing,
-    //   size,
-    //   1
-    // );
+    const addBtn = document.querySelector(".item-add");
+    addBtn.classList.add("added");
+    addBtn.innerHTML = "✔️ Added";
+    addBtn.style.pointerEvents = "none";
+    setTimeout(() => {
+      addBtn.classList.remove("added");
+      addBtn.innerHTML = "+ Add to Cart";
+      addBtn.style.pointerEvents = "auto";
+    }, 1000);
+
+    updateCart(itemDetails, size, 1);
   }
 
   return (
@@ -71,6 +74,9 @@ export default function ItemDescription({ itemDetails, setCart }) {
         <h1>{itemDetails.title}</h1>
         <div className="item-price-container">
           <h3 className="item-price">${itemDetails.price}</h3>
+          <button className="item-add" onClick={() => add()}>
+            + Add to Cart
+          </button>
           {itemDetails.clothing && (
             <ul className="item-size-buttons">
               <li>
@@ -120,9 +126,6 @@ export default function ItemDescription({ itemDetails, setCart }) {
               </li>
             </ul>
           )}
-          <button className="item-add" onClick={add}>
-            + Add to Cart
-          </button>
         </div>
         <h3>PRODUCT DESCRIPTION</h3>
         <ul className="product-description">

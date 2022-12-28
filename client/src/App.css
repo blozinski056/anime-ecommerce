@@ -347,6 +347,7 @@ body {
   grid-template-columns: 1fr 1.5fr;
   gap: 50px;
   align-items: flex-start;
+  overflow-y: auto;
 }
 .item-desc .img-container {
   display: flex;
@@ -403,6 +404,7 @@ body {
 .item-desc .item-info .item-price-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 60px 1fr;
   width: 100%;
   padding: 15px 0;
 }
@@ -410,15 +412,37 @@ body {
   font-size: 30px;
   align-self: center;
 }
+.item-desc .item-info .item-price-container .item-add {
+  width: 114px;
+  height: 37px;
+  position: relative;
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: rgb(255, 115, 0);
+  color: white;
+  align-self: center;
+  justify-self: start;
+  grid-row: 2;
+  grid-column: 1;
+  transition: 0.3s;
+}
+.item-desc .item-info .item-price-container .item-add:active {
+  box-shadow: inset 2px 2px 5px black;
+}
+.item-desc .item-info .item-price-container .item-add.added {
+  transition: 0.3s;
+  background-color: green;
+}
 .item-desc .item-info .item-price-container .item-size-buttons {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 70px);
 }
 .item-desc .item-info .item-price-container .item-size-buttons li {
-  width: 70px;
-  height: 70px;
-  padding: 10px;
+  width: 60px;
+  height: 60px;
+  padding: 5px;
 }
 .item-desc .item-info .item-price-container .item-size-buttons li .size-button {
   width: 100%;
@@ -431,15 +455,6 @@ body {
   background-color: rgb(255, 115, 0);
   box-shadow: inset 2px 2px 5px black;
 }
-.item-desc .item-info .item-price-container .item-add {
-  padding: 5px 10px;
-  font-size: 15px;
-  cursor: pointer;
-  background-color: rgb(255, 115, 0);
-  color: white;
-  align-self: center;
-  justify-self: end;
-}
 .item-desc .item-info .product-description {
   width: 100%;
   padding-left: 20px;
@@ -450,6 +465,8 @@ body {
   padding-top: 15px;
 }
 .item-desc .item-info .reviews {
+  height: 300px;
+  overflow-y: auto;
   list-style: none;
 }
 .item-desc .item-info .reviews li {
@@ -471,4 +488,8 @@ body {
   height: 20px;
   -o-object-fit: contain;
      object-fit: contain;
+}
+.item-desc .item-info .reviews li p {
+  height: 100px;
+  overflow-y: auto;
 }/*# sourceMappingURL=App.css.map */
