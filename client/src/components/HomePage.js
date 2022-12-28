@@ -29,7 +29,7 @@ export default function HomePage() {
     <div className="home-page">
       <h1>EinSite</h1>
       <form className="search-form" onSubmit={(e) => search(e)}>
-        <input className="search-bar" placeholder="Search" />
+        <input className="search-bar home" placeholder="Search" />
         <button className="search-icon" type="submit">
           <img src="./images/search-white-2.png" alt="" />
         </button>

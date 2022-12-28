@@ -387,6 +387,142 @@ body {
   }
 }
 
+///////////////////
+// DESCRIPTION PAGE
+///////////////////
+.item-desc {
+  @include w-h(100vw, calc(100vh - 90px));
+  padding: 2vh 10vw 2vh 10vw;
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  align-items: flex-start;
+
+  .img-container {
+    @include flexbox($fd: column, $jc: flex-start);
+    @include w-h(30vw, calc(96vh - 90px));
+    .img-display {
+      height: 70%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .img-previews {
+      @include flexbox;
+      @include w-h(100%, auto);
+      margin-top: 3vh;
+
+      img {
+        @include w-h(80px, 80px);
+        object-fit: contain;
+        margin: 20px;
+        border: solid 2px $color-orange;
+        box-shadow: 1px 1px 10px black;
+        cursor: pointer;
+
+        &.clicked {
+          border: solid 2px black;
+          box-shadow: none;
+          opacity: 0.3;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .item-info {
+    @include flexbox($fd: column, $ai: flex-start);
+
+    h1 {
+      width: 100%;
+      font-size: 40px;
+      text-align: left;
+      padding-bottom: 15px;
+      border-bottom: solid 1px black;
+    }
+
+    .item-price-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      padding: 15px 0;
+
+      .item-price {
+        font-size: 30px;
+        align-self: center;
+      }
+
+      .item-size-buttons {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(5, 70px);
+
+        li {
+          @include w-h(70px, 70px);
+          padding: 10px;
+
+          .size-button {
+            @include w-h(100%, 100%);
+            cursor: pointer;
+            border-radius: 50%;
+
+            &.clicked {
+              color: white;
+              background-color: $color-orange;
+              box-shadow: inset 2px 2px 5px black;
+            }
+          }
+        }
+      }
+
+      .item-add {
+        padding: 5px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        background-color: $color-orange;
+        color: white;
+        align-self: center;
+        justify-self: end;
+      }
+    }
+
+    .product-description {
+      width: 100%;
+      padding-left: 20px;
+      padding-bottom: 20px;
+      border-bottom: solid 1px black;
+    }
+
+    .reviews-header {
+      padding-top: 15px;
+    }
+
+    .reviews {
+      list-style: none;
+
+      li {
+        padding-top: 20px;
+
+        div {
+          @include flexbox($jc: flex-start);
+          margin-bottom: 5px;
+          padding: 0;
+
+          .username {
+            margin-right: 15px;
+          }
+
+          img {
+            @include w-h(20px, 20px);
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+}
+
 // ////////////////////
 // // DESCRIPTION PAGE
 // ////////////////////
@@ -541,7 +677,7 @@ body {
 //       }
 
 //       h5 {
-//         font-size: 14px;
+//         font-size: ;
 //       }
 
 //       .qty {

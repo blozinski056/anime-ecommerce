@@ -336,4 +336,139 @@ body {
   box-shadow: 2px 2px 7px rgb(255, 115, 0), 2px -2px 7px rgb(255, 115, 0), -2px 2px 7px rgb(255, 115, 0), -2px -2px 7px rgb(255, 115, 0);
   transform: translate(-2px, -2px);
   transition: 0.3s;
+}
+
+.item-desc {
+  width: 100vw;
+  height: calc(100vh - 90px);
+  padding: 2vh 10vw 2vh 10vw;
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  align-items: flex-start;
+}
+.item-desc .img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 30vw;
+  height: calc(96vh - 90px);
+}
+.item-desc .img-container .img-display {
+  height: 70%;
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.item-desc .img-container .img-previews {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  margin-top: 3vh;
+}
+.item-desc .img-container .img-previews img {
+  width: 80px;
+  height: 80px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin: 20px;
+  border: solid 2px rgb(255, 115, 0);
+  box-shadow: 1px 1px 10px black;
+  cursor: pointer;
+}
+.item-desc .img-container .img-previews img.clicked {
+  border: solid 2px black;
+  box-shadow: none;
+  opacity: 0.3;
+  cursor: default;
+}
+.item-desc .item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.item-desc .item-info h1 {
+  width: 100%;
+  font-size: 40px;
+  text-align: left;
+  padding-bottom: 15px;
+  border-bottom: solid 1px black;
+}
+.item-desc .item-info .item-price-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  padding: 15px 0;
+}
+.item-desc .item-info .item-price-container .item-price {
+  font-size: 30px;
+  align-self: center;
+}
+.item-desc .item-info .item-price-container .item-size-buttons {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 70px);
+}
+.item-desc .item-info .item-price-container .item-size-buttons li {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
+}
+.item-desc .item-info .item-price-container .item-size-buttons li .size-button {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.item-desc .item-info .item-price-container .item-size-buttons li .size-button.clicked {
+  color: white;
+  background-color: rgb(255, 115, 0);
+  box-shadow: inset 2px 2px 5px black;
+}
+.item-desc .item-info .item-price-container .item-add {
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: rgb(255, 115, 0);
+  color: white;
+  align-self: center;
+  justify-self: end;
+}
+.item-desc .item-info .product-description {
+  width: 100%;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px black;
+}
+.item-desc .item-info .reviews-header {
+  padding-top: 15px;
+}
+.item-desc .item-info .reviews {
+  list-style: none;
+}
+.item-desc .item-info .reviews li {
+  padding-top: 20px;
+}
+.item-desc .item-info .reviews li div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+  padding: 0;
+}
+.item-desc .item-info .reviews li div .username {
+  margin-right: 15px;
+}
+.item-desc .item-info .reviews li div img {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }/*# sourceMappingURL=App.css.map */

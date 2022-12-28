@@ -20,8 +20,10 @@ export default function Navbar({ cart, setClickToggle }) {
       return !prevClickToggle;
     });
     document.querySelector(".search-bar").value = "";
-    document.querySelector(".min-price").value = "";
-    document.querySelector(".max-price").value = "";
+    document.querySelector(".min-price") &&
+      (document.querySelector(".min-price").value = "");
+    document.querySelector(".max-price") &&
+      (document.querySelector(".max-price").value = "");
     navigate("/items/search");
   }
 
@@ -35,8 +37,10 @@ export default function Navbar({ cart, setClickToggle }) {
       return !prevClickToggle;
     });
     document.querySelector(".search-bar").value = "";
-    document.querySelector(".min-price").value = "";
-    document.querySelector(".max-price").value = "";
+    document.querySelector(".min-price") &&
+      (document.querySelector(".min-price").value = "");
+    document.querySelector(".max-price") &&
+      (document.querySelector(".max-price").value = "");
     navigate(`/items/search/${word}`);
   }
 
@@ -54,7 +58,16 @@ export default function Navbar({ cart, setClickToggle }) {
       <nav className="navbar">
         <h1 onClick={() => navigate("/")}>EinSite</h1>
         <form className="search-form" onSubmit={search}>
-          <input className="search-bar" placeholder="Search" type="text" />
+          <input
+            className="search-bar"
+            placeholder="Search"
+            type="text"
+            // defaultValue={
+            //   document.querySelector(".search-bar.home")
+            //     ? document.querySelector(".search-bar.home").value
+            //     : ""
+            // }
+          />
           <button className="search-icon" type="submit">
             <img src="/images/search-white-2.png" alt="" />
           </button>
