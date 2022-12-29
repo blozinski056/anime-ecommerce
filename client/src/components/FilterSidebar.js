@@ -74,7 +74,6 @@ export default function Filters({ searchWord, category, filterTiles }) {
     const min = document.querySelector(".min-price").value;
     const max = document.querySelector(".max-price").value;
     let priceRange = [min, max];
-    console.log(priceRange);
 
     animeFilters.forEach((anime) => {
       const a = document.querySelector(`[name='${anime}']`);

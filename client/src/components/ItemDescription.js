@@ -4,6 +4,12 @@ export default function ItemDescription({ itemDetails, updateCart }) {
   const [size, setSize] = React.useState("M");
   const [preview, setPreview] = React.useState(itemDetails.image);
 
+  React.useEffect(() => {
+    if (preview === undefined) {
+      setPreview(itemDetails.image);
+    }
+  }, [preview, itemDetails.image]);
+
   const changeImg = (imgNum) => {
     const img1 = document.querySelector(".img-1");
     const img2 = document.querySelector(".img-2");

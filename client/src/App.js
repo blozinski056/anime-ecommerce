@@ -16,6 +16,28 @@ export default function App() {
   const [itemDetails, setItemDetails] = React.useState({});
   const [clickToggle, setClickToggle] = React.useState(false);
 
+  React.useEffect(() => {
+    const cartData = JSON.parse(window.localStorage.getItem("cart"));
+    const itemDetailsData = JSON.parse(
+      window.localStorage.getItem("itemDetails")
+    );
+
+    if (cartData !== null) setCart(cartData);
+    if (itemDetailsData !== null) setItemDetails(itemDetailsData);
+  }, []);
+
+  React.useEffect(() => {
+    if (cart.length !== 0) {
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  React.useEffect(() => {
+    if (Object.keys(itemDetails).length !== 0) {
+      window.localStorage.setItem("itemDetails", JSON.stringify(itemDetails));
+    }
+  }, [itemDetails]);
+
   const allTiles = React.useMemo(() => {
     let newArray = data.map((item) => {
       return (
@@ -29,10 +51,8 @@ export default function App() {
     (itemObj, itemSize, itemQuantity) => {
       let tempCart = [];
       let foundMatch = false;
-      console.log(cart);
 
       cart.forEach((item) => {
-        console.log(item);
         if (item.obj.title === itemObj.title && item.size === itemSize) {
           if (item.quantity + itemQuantity !== 0) {
             tempCart.push({
@@ -50,7 +70,6 @@ export default function App() {
       if (!foundMatch) {
         tempCart.push({ obj: itemObj, size: itemSize, quantity: itemQuantity });
       }
-      console.log(tempCart);
 
       setCart(tempCart);
     },
